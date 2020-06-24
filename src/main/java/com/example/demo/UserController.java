@@ -1,4 +1,4 @@
-package com.example.demo.User;
+package com.example.demo;
 
 import javax.validation.Valid;
 
@@ -10,19 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@EnableAutoConfiguration
 @RestController()
 
 public class UserController{
 
-    //@GetMapping("/index")
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(){
-        return "index";
-    }
-
-    @GetMapping("/sign-up")
-    public String getSignUp() {
+    @RequestMapping("/sign-up")
+    public @ResponseBody String getSignUp() {
         return "sign-up";
     }
 }
