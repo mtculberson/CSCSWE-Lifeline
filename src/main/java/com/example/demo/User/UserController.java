@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.User;
 
 import javax.validation.Valid;
 
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class UserController{
 
     @GetMapping(value="/sign-up", name="sign-up")
-    public @ResponseBody String getSignUp() {
+    public String getSignUp() {
         return "sign-up";
     }
 }
