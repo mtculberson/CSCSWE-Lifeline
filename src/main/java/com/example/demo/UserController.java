@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class UserController{
 
-    @RequestMapping("/sign-up")
+    @GetMapping(value="/sign-up", name="sign-up")
     public @ResponseBody String getSignUp() {
         return "sign-up";
     }
