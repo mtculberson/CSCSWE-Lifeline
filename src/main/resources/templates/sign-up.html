@@ -23,7 +23,7 @@
 </head>
 <body class="body">
   <div data-collapse="medium" data-animation="over-right" data-duration="400" data-doc-height="1" role="banner" class="navbar w-nav">
-    <div class="nav-holder"><a href="index" class="brand w-nav-brand"><img th:src="@{images/lifeline.svg}" width="128" alt="" class="type"></a>
+    <div class="nav-holder"><a href="index" class="brand w-nav-brand w--current"><img th:src="@{images/type.svg}" width="128" alt="" class="type"></a>
       <nav role="navigation" class="navmenu w-nav-menu"><a href="sign-in" class="navlink w-nav-link">Sign in</a><a href="sign-up" aria-current="page" class="navlink lastcta w-nav-link w--current">Create an account</a></nav>
       <div class="menubutton w-nav-button">
         <div class="icon w-icon-nav-menu"></div>
@@ -33,6 +33,26 @@
   <div class="box-holder">
     <div class="hero-text-holder">
       <div class="headhero-center">Create an account</div>
+          <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+            <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
+
+            <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
+
+            <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
+
+            <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+
+            <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+
+            <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" required="true" th:field="*{ConfirmPassword}" /></label>
+
+            <input class="btn" type="submit" value="Create an account" />
+          </form>
+    </div>
+  </div>
+  <div class="phone-sign--up w-container">
+    <div class="hero-text-holder">
+      <div class="headhero-center">Create an account</div>
       <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
         <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
 
@@ -40,7 +60,7 @@
 
         <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
 
-        <label class="field-label-2">Phone Number: <input type="text" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+        <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
 
         <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
 
@@ -50,21 +70,11 @@
       </form>
     </div>
   </div>
-  <div class="footersection-button">
+  <div class="footersection">
     <div class="footerpart w-container">
       <div class="w-row">
         <div class="w-col w-col-6">
           <div class="copyright">© 2020 Lifeline.</div>
-        </div>
-        <div class="column-2 w-col w-col-3">
-          <a href="#" class="footerlink w-inline-block">
-            <div class="footertext">Terms &amp; Conditions</div>
-          </a>
-        </div>
-        <div class="column-3 w-col w-col-3">
-          <a href="#" class="footerlink w-inline-block">
-            <div class="footertext">Privacy Policy</div>
-          </a>
         </div>
       </div>
     </div>
