@@ -1,21 +1,25 @@
 package com.project.lifeline.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "User")
-public class User {
+public class Users {
 
     @Id
+    @Column(name = "USER_ID" , columnDefinition="uniqueidentifier")
     private UUID UserId;
+
+    @Column(name = "EMAIL" , columnDefinition="nvarchar")
     private String Email;
+
+    @Column(name = "PASSWORD" , columnDefinition="varbinary")
     private String Password;
+
+    @Column(name = "CONTACT_ID" , columnDefinition="uniqueidentifier")
     private UUID ContactId;
 
-    public User() {
+    public Users() {
 
     }
 

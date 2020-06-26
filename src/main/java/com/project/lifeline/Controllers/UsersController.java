@@ -1,17 +1,20 @@
 package com.project.lifeline.Controllers;
 
-import com.project.lifeline.Services.UserServiceImpl;
 import com.project.lifeline.Models.RegisterUserModel;
+import com.project.lifeline.Services.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UserController{
+public class UsersController {
+
+    @Autowired
+    private UsersService usersService;
 
     @RequestMapping("/sign-up")
     String getSignUp() {
-        UserServiceImpl service = new UserServiceImpl();
-        service.createNewUser(new RegisterUserModel()); //should go in POST
+        //usersService.createNewUser(new RegisterUserModel());
         return "sign-up";
     }
 
