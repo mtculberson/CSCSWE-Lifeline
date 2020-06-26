@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import javax.validation.Validator;
 
@@ -23,12 +25,19 @@ public class UsersController {
     }
 
     @PostMapping("/sign-up")
-    public String postSignUp(@Valid @ModelAttribute RegisterUserModel user,BindingResult results){
+    public ModelAndView postSignUp(@Valid @ModelAttribute RegisterUserModel user,BindingResult results, ModelAndView modelAndView){
         if(results.hasErrors()){
-            return "sign-up";
+            modelAndView.setViewName("sign-up");
+            return modelAndView;
         }
         this.usersService.createNewUser(user);
-        return "index";
+
+        modelAndView.addObject("FirstName", user.getFirstName());
+        modelAndView.addObject("LastName", user.getLastName());
+        modelAndView.addObject("PhoneNumber", user.getPhoneNumber());
+        modelAndView.addObject("Email", user.getEmail());
+        modelAndView.setViewName("confirm");
+        return modelAndView;
     }
 
     @RequestMapping("/sign-in")
