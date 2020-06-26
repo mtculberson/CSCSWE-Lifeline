@@ -41,7 +41,7 @@ public class UsersController {
         return modelAndView;
     }
 
-    @RequestMapping("/sign-in")
+    @GetMapping("/sign-in")
     public String getSignIn(Model model) {
         model.addAttribute("user", new SignInUserModel());
         return "sign-in";

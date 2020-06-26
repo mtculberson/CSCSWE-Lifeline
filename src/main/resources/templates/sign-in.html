@@ -10,10 +10,10 @@
   <meta charset="utf-8">
   <title>Sign in</title>
 </head>
-<>
+<body>
 <div layout:fragment="content">
   <div class="box-holder">
-    <div class="headhero-left">Sign in</div>
+    <div class="headhero-center">Sign in</div>
     <div class="hero-text-holder">
       <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
         <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
@@ -24,7 +24,7 @@
   </div>
 </div>
   <div class="phone-sign-in w-container">
-    <div class="headhero-left">Sign in</div>
+    <div class="headhero-center">Sign in</div>
     <div class="hero-text-holder">
       <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
         <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
