@@ -1,10 +1,10 @@
 package com.project.lifeline.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +13,7 @@ public class Contact {
 
     @Id
     @Column(name = "CONTACT_ID" , columnDefinition="uniqueidentifier")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ContactId;
 
     @Column(name = "FIRST_NAME" , columnDefinition="nvarchar(255)")
@@ -24,11 +25,13 @@ public class Contact {
     @Column(name = "PHONE_NUMBER" , columnDefinition="nvarchar(20)")
     private String PhoneNumber;
 
+    @CreatedDate
     @Column(name = "CREATED_ON" , columnDefinition="datetime")
-    private Date CreatedOn;
+    private LocalDateTime CreatedOn;
 
+    @LastModifiedDate
     @Column(name = "UPDATED_ON" , columnDefinition="datetime")
-    private Date UpdatedOn;
+    private LocalDateTime UpdatedOn;
 
     public UUID getContactId() {
         return ContactId;
@@ -62,19 +65,19 @@ public class Contact {
         PhoneNumber = phoneNumber;
     }
 
-    public Date getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return CreatedOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         CreatedOn = createdOn;
     }
 
-    public Date getUpdatedOn() {
+    public LocalDateTime getUpdatedOn() {
         return UpdatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public void setUpdatedOn(LocalDateTime updatedOn) {
         UpdatedOn = updatedOn;
     }
 }

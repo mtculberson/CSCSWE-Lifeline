@@ -8,6 +8,8 @@ import com.project.lifeline.Repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Service
@@ -24,11 +26,12 @@ public class UsersService {
         contact.setFirstName(model.getFirstName());
         contact.setLastName(model.getLastName());
         contact.setPhoneNumber(model.getPhoneNumber());
+        contact.setCreatedOn(LocalDateTime.now());
         this.contactRepository.save(contact);
 
         Users user = new Users();
         //user.setPassword(model.getPassword()); THIS NEEDS TO BE HASHED FIRST
-        user.setEmail("tannerculberson.capstone@gmail.com");
+        user.setEmail(model.getEmail());
         user.setContactId(contact.getContactId());
         this.usersRepository.save(user);
 

@@ -9,13 +9,14 @@ public class Users {
 
     @Id
     @Column(name = "USER_ID" , columnDefinition="uniqueidentifier")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID UserId;
 
     @Column(name = "EMAIL" , columnDefinition="nvarchar")
     private String Email;
 
     @Column(name = "PASSWORD" , columnDefinition="varbinary")
-    private String Password;
+    private byte[] Password;
 
     @Column(name = "CONTACT_ID" , columnDefinition="uniqueidentifier")
     private UUID ContactId;
@@ -40,11 +41,11 @@ public class Users {
         Email = email;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return Password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         Password = password;
     }
 
