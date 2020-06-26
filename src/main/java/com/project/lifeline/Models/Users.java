@@ -18,11 +18,21 @@ public class Users {
     @Column(name = "PASSWORD" , columnDefinition="varbinary")
     private byte[] Password;
 
+    @Column(name = "ROLE", columnDefinition = "nvarchar(255)")
+    private String Role;
+
     @Column(name = "CONTACT_ID" , columnDefinition="uniqueidentifier")
     private UUID ContactId;
 
     public Users() {
 
+    }
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String role) {
+        Role = role;
     }
 
     public UUID getUserId() {

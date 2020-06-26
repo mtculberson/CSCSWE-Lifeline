@@ -2,6 +2,7 @@ package com.project.lifeline.Services;
 
 import com.project.lifeline.Models.Contact;
 import com.project.lifeline.Models.RegisterUserModel;
+import com.project.lifeline.Models.SignInUserModel;
 import com.project.lifeline.Models.Users;
 import com.project.lifeline.Repositories.ContactRepository;
 import com.project.lifeline.Repositories.UsersRepository;
@@ -32,9 +33,15 @@ public class UsersService {
         Users user = new Users();
         //user.setPassword(model.getPassword()); THIS NEEDS TO BE HASHED FIRST
         user.setEmail(model.getEmail());
+        user.setRole("USER");
         user.setContactId(contact.getContactId());
         this.usersRepository.save(user);
 
         return user;
+    }
+
+    public boolean signIn(SignInUserModel model) {
+
+        return false;
     }
 }

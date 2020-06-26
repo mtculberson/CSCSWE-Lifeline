@@ -1,6 +1,7 @@
 package com.project.lifeline.Controllers;
 
 import com.project.lifeline.Models.RegisterUserModel;
+import com.project.lifeline.Models.SignInUserModel;
 import com.project.lifeline.Services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,25 @@ public class UsersController {
     @RequestMapping("/sign-in")
     String getSignIn() {
         return "sign-in";
+    }
+
+    @PostMapping("/sign-in")
+    public ModelAndView postSignIn(@Valid @ModelAttribute SignInUserModel user, BindingResult results, ModelAndView modelAndView){
+        if(results.hasErrors()){
+            modelAndView.setViewName("sign-up");
+            return modelAndView;
+        }
+        this.usersService.signIn(user);
+
+        modelAndView.addObject("Email", user.getEmail());
+        modelAndView.setViewName("dashboard");
+        return modelAndView;
+    }
+
+    @PostMapping("/logout")
+    public ModelAndView logOut(BindingResult results, ModelAndView modelAndView) {
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
     @RequestMapping("/forgot")
