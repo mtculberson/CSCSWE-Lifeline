@@ -42,7 +42,8 @@ public class UsersController {
     }
 
     @RequestMapping("/sign-in")
-    String getSignIn() {
+    public String getSignIn(Model model) {
+        model.addAttribute("user", new SignInUserModel());
         return "sign-in";
     }
 
@@ -55,6 +56,7 @@ public class UsersController {
         this.usersService.signIn(user);
 
         modelAndView.addObject("Email", user.getEmail());
+        modelAndView.addObject("Password", user.getPassword());
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }

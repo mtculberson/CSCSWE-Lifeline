@@ -10,63 +10,29 @@
   <meta charset="utf-8">
   <title>Sign in</title>
 </head>
-<body>
+<>
 <div layout:fragment="content">
   <div class="box-holder">
     <div class="headhero-left">Sign in</div>
     <div class="hero-text-holder">
-      <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form" class="form"><label for="email">Email Address</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email" id="email" required=""><label for="Password">Password</label><input type="email" class="text-field-2 w-input" maxlength="256" name="Password" data-name="Password" id="Password" required="">
-          <div class="w-row">
-            <div class="w-col w-col-8">
-              <a href="forgot" class="link-block-5 w-inline-block">
-                <div class="forget">Forgot Your Password?</div>
-              </a>
-            </div>
-            <div class="w-col w-col-4">
-              <a href="#" class="link-block-9 w-inline-block">
-                <div class="btn">Sign in</div>
-              </a>
-            </div>
-          </div>
-        </form>
-        <div class="w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="phone-sign-in w-container">
-    <div class="headhero-left">Sign in</div>
-    <div class="hero-text-holder">
-      <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form" class="form"><label for="email-2">Email Address</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email-2" data-name="Email 2" id="email-2" required=""><label for="Password-2">Password</label><input type="email" class="text-field-2 w-input" maxlength="256" name="Password-2" data-name="Password 2" id="Password-2" required="">
-          <div class="w-row">
-            <div class="column-9 w-col w-col-8">
-              <a href="forgot" class="link-block-5 w-inline-block">
-                <div class="forget">Forgot Your Password?</div>
-              </a>
-            </div>
-            <div class="w-col w-col-4">
-              <a href="#" class="link-block-9 w-inline-block">
-                <div class="btn">Sign in</div>
-              </a>
-            </div>
-          </div>
-        </form>
-        <div class="w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
-      </div>
+      <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+        <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
+        <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+        <input class="btn" type="submit" value="Sign in" />
+      </form>
     </div>
   </div>
 </div>
+  <div class="phone-sign-in w-container">
+    <div class="headhero-left">Sign in</div>
+    <div class="hero-text-holder">
+      <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+        <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
+        <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+        <input class="btn" type="submit" value="Sign in" />
+      </form>
+    </div>
+  </div>
 </div>
 </body>
 </html>

@@ -13,8 +13,8 @@
 <body>
 <div layout:fragment="content">
   <div class="box-holder">
+    <div class="headhero-center">Create an account</div>
     <div class="hero-text-holder">
-      <div class="headhero-center">Create an account</div>
           <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
             <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
 
