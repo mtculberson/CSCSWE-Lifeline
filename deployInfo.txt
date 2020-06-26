@@ -1,0 +1,16 @@
+pre-requisites:
+
+eb cli: https://github.com/aws/aws-elastic-beanstalk-cli-setup
+
+python 3.7: https://www.python.org/downloads/release/python-370/ (you may need to set the path)
+
+
+command line:
+
+-cd into project folder
+
+mvnw clean package spring-boot:repackage
+
+eb deploy
+
+
