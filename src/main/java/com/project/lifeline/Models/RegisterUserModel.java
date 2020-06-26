@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 
@@ -13,6 +14,7 @@ public class RegisterUserModel {
     private UUID UserId;
 
     @NotNull
+    @NotBlank
     @Size(min = 1, max = 255)
     private String FirstName;
 
