@@ -33,47 +33,21 @@
   <div class="box-holder">
     <div class="hero-text-holder">
       <div class="headhero-center">Create an account</div>
-      <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form" class="form-sign-up"><label for="First-Name" class="field-label-2">First Name</label><input type="text" class="text-field w-input" maxlength="256" name="First-Name" data-name="First Name" id="First-Name" required=""><label for="Last-Name" class="field-label-2">Last Name</label><input type="text" class="text-field w-input" maxlength="256" name="Last-Name" data-name="Last Name" id="Last-Name"><label for="Phone-Number" class="field-label-3">Phone Number</label><input type="tel" class="text-field w-input" maxlength="256" name="Phone-Number" data-name="Phone Number" id="Phone-Number" required=""><label for="email" class="field-label-4">Email Address</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email" id="email" required=""><label for="Password" class="field-label-5">Password</label>
-          <div><input type="email" class="text-field-2 w-input" maxlength="256" name="Password" data-name="Password" id="Password" required=""></div><label for="Password-2" class="field-label-6">Confirm Password</label>
-          <div><input type="email" class="text-field-2 w-input" maxlength="256" name="Confirm-Password" data-name="Confirm Password" id="Confirm-Password" required=""></div>
-          <a href="#" class="lightboxlink w-inline-block w-lightbox">
-            <div class="btn">Create an account</div>
-            <script type="application/json" class="w-json">{
-  "items": []
-}</script>
-          </a>
-        </form>
-        <div class="w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="phone-sign--up w-container">
-    <div class="hero-text-holder">
-      <div class="headhero-center">Create an acount</div>
-      <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form" class="form-sign-up"><label for="First-Name-2" class="field-label-2">First Name</label><input type="text" class="text-field w-input" maxlength="256" name="First-Name" data-name="First Name" id="First-Name-2"><label for="Last-Name-2" class="field-label-2">Last Name</label><input type="text" class="text-field w-input" maxlength="256" name="Last-Name" data-name="Last Name" id="Last-Name-2"><label for="Phone-Number-2" class="field-label-3">Phone Number</label><input type="tel" maxlength="256" name="Phone-Number-2" data-name="Phone Number 2" id="Phone-Number-2" class="text-field w-input"><label for="email-2" class="field-label-4">Email Address</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email-2" data-name="Email 2" id="email-2" required=""><label for="Password-3" class="field-label-5">Password</label>
-          <div><input type="email" class="text-field-2 w-input" maxlength="256" name="Password-3" data-name="Password 3" id="Password-3" required=""></div><label for="Password-4" class="field-label-6">Confirm Password</label>
-          <div><input type="email" class="text-field-2 w-input" maxlength="256" name="Password-2" data-name="Password 2" id="Password-2" required=""></div>
-          <a href="#" class="lightboxlink w-inline-block w-lightbox">
-            <div class="btn">Create an account</div>
-            <script type="application/json" class="w-json">{
-  "items": []
-}</script>
-          </a>
-        </form>
-        <div class="w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
-      </div>
+      <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+        <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
+
+        <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
+
+        <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Email}" /></label>
+
+        <label class="field-label-2">Phone Number: <input type="text" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+
+        <label class="field-label-2">Password: <input type="text" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+
+        <label class="field-label-2">Confirm Password: <input type="text" class="text-field w-input" required="true" th:field="*{ConfirmPassword}" /></label>
+
+        <input class="btn" type="submit" value="Create an account" />
+      </form>
     </div>
   </div>
   <div class="footersection-button">

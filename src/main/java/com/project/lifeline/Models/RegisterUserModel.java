@@ -1,5 +1,8 @@
 package com.project.lifeline.Models;
 
+import org.springframework.beans.factory.annotation.Required;
+
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
