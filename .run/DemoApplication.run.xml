@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="demo" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
+  <configuration default="false" name="Lifeline" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="CSCSWE-Lifeline" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.lifeline.LifelineApplication" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <method v="2">
       <option name="Make" enabled="true" />
