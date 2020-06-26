@@ -37,7 +37,7 @@ public class UsersController {
         modelAndView.addObject("LastName", user.getLastName());
         modelAndView.addObject("PhoneNumber", user.getPhoneNumber());
         modelAndView.addObject("Email", user.getEmail());
-        modelAndView.setViewName("confirm");
+        modelAndView.setViewName("dashboard");
         return modelAndView;
     }
 
