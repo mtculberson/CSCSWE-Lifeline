@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Table(name="users", schema = "dbo")
 public class Users {
 
     @Id
