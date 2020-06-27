@@ -13,6 +13,7 @@ public class Users {
     private UUID UserId;
 
     //lololol
+    //tanner was here :PPPP
 
     @Column(name = "EMAIL" , columnDefinition="nvarchar")
     private String Email;
