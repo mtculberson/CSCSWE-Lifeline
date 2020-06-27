@@ -12,6 +12,8 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID UserId;
 
+    //lololol
+
     @Column(name = "EMAIL" , columnDefinition="nvarchar")
     private String Email;
 
