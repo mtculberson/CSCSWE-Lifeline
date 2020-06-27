@@ -12,8 +12,6 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID UserId;
 
-    //lololol
-    //tanner was here :PPPP
 
     @Column(name = "EMAIL" , columnDefinition="nvarchar")
     private String Email;
