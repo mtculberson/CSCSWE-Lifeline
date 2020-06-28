@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name="contact", schema = "dbo")
 public class Contact {
-    //Hello world!
+
     @Id
     @Column(name = "CONTACT_ID" , columnDefinition="uniqueidentifier")
     @GeneratedValue(strategy = GenerationType.AUTO)
