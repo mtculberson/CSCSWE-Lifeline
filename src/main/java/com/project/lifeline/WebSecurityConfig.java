@@ -33,12 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+        auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select USERNAME, PASSWORD, enabled from Users where USERNAME=?");
+                .usersByUsernameQuery("select USERNAME, PASSWORD, enabled from Users where USERNAME=?")
+                .authoritiesByUsernameQuery("select USERNAME, ROLE from Users where USERNAME=?");
     }
 
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
@@ -52,9 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
         http.csrf().disable();
-    }
+    }*/
 
-    /*@Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().authenticated()
@@ -63,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().permitAll();
     }
-*/
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
