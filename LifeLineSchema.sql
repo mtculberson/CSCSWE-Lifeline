@@ -41,7 +41,7 @@ CREATE TABLE dbo.[users] (
          CONSTRAINT DF_users_USER_ID DEFAULT newsequentialid(),
      [USERNAME] nvarchar(max) NOT NULL,
      [ENABLED] bit DEFAULT 1,
-     [PASSWORD] varbinary(max) NULL,
+     [PASSWORD] nvarchar(max) NULL,
      [ROLE] nvarchar(255) NOT NULL,
      [CONTACT_ID] uniqueidentifier NOT NULL
          CONSTRAINT FK_users_CONTACT_ID_contact_CONTACT_ID REFERENCES dbo.contact(CONTACT_ID)

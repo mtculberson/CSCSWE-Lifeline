@@ -43,7 +43,7 @@ public class UsersService {
         this.contactRepository.save(contact);
 
         Users user = new Users();
-        user.setPassword(passwordEncoder.encode(model.getPassword()).getBytes());
+        user.setPassword(passwordEncoder.encode(model.getPassword()));
         user.setUsername(model.getUsername());
         user.setRole("USER");
         user.setContactId(contact.getContactId());

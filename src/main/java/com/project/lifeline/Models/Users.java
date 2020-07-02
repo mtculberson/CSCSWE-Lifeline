@@ -13,11 +13,11 @@ public class Users {
     private UUID UserId;
 
 
-    @Column(name = "Username" , columnDefinition="nvarchar")
+    @Column(name = "USERNAME" , columnDefinition="nvarchar")
     private String Username;
 
-    @Column(name = "PASSWORD" , columnDefinition="varbinary")
-    private byte[] Password;
+    @Column(name = "PASSWORD" , columnDefinition="nvarchar")
+    private String Password;
 
     @Column(name = "ROLE", columnDefinition = "nvarchar(255)")
     private String Role;
@@ -52,11 +52,11 @@ public class Users {
         Username = username;
     }
 
-    public byte[] getPassword() {
+    public String getPassword() {
         return Password;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         Password = password;
     }
 
