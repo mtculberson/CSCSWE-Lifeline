@@ -1,6 +1,7 @@
 package com.project.lifeline.Controllers;
 
 import com.project.lifeline.Models.RegisterUserModel;
+import org.springframework.security.core.Authentication;
 import com.project.lifeline.Models.SignInUserModel;
 import com.project.lifeline.Services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class UsersController {
     }
 
     @GetMapping("/dashboard")
-    String getDashboard() {
+    String getDashboard(Authentication user) {
+        String username = user.getName();
         return "dashboard";
     }
 }

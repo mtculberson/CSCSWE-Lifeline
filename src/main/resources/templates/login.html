@@ -16,10 +16,10 @@
   <div class="box-holder">
     <div class="headhero-center">Sign in</div>
     <div class="hero-text-holder">
-      <div th:if="${param.error}">
+      <div th:if="${param.error}" style="color:red">
         Invalid username and password.
       </div>
-      <div th:if="${param.logout}">
+      <div th:if="${param.logout}" style="color:blue">
         You have been logged out.
       </div>
       <form name ='f' th:action="@{/login}" method="post">
@@ -32,6 +32,12 @@
   <div class="phone-sign-in w-container">
     <div class="headhero-center">Sign in</div>
     <div class="hero-text-holder">
+      <div th:if="${param.error}" style="color:red">
+        Invalid username and password.
+      </div>
+      <div th:if="${param.logout}" style="color:blue">
+        You have been logged out.
+      </div>
       <form name ='f' th:action="@{/login}" method="post">
         <label class="field-label-2">Email: <input name="username" type="text" class="text-field w-input" required="true" /></label>
         <label class="field-label-2">Password: <input name="password" type="password" class="text-field w-input" required="true"/></label>
