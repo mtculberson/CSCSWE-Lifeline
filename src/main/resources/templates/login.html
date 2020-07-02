@@ -22,19 +22,19 @@
       <div th:if="${param.logout}">
         You have been logged out.
       </div>
-      <form th:action="@{/login}" th:object="${user}" method="post">
-        <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Username}" /></label>
-        <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
-        <input class="btn" type="submit" value="Sign in" />
+      <form name ='f' th:action="@{/login}" method="post">
+        <label class="field-label-2">Email: <input type="text" name="username" class="text-field w-input" required="true" /></label>
+        <label class="field-label-2">Password: <input type="password" name="password" class="text-field w-input" required="true" /></label>
+        <input class="btn" type="submit" name="submit" value="Sign in" />
       </form>
     </div>
   </div>
   <div class="phone-sign-in w-container">
     <div class="headhero-center">Sign in</div>
     <div class="hero-text-holder">
-      <form th:action="@{/login}" th:object="${user}" method="post">
-        <label class="field-label-2">Email: <input name="username" type="text" class="text-field w-input" required="true" th:field="*{Username}" /></label>
-        <label class="field-label-2">Password: <input name="password" type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+      <form name ='f' th:action="@{/login}" method="post">
+        <label class="field-label-2">Email: <input name="username" type="text" class="text-field w-input" required="true" /></label>
+        <label class="field-label-2">Password: <input name="password" type="password" class="text-field w-input" required="true"/></label>
         <input class="btn" type="submit" value="Sign in" />
       </form>
     </div>

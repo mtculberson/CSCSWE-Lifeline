@@ -55,4 +55,9 @@ public class UsersController {
     String getForgot() {
         return "forgot";
     }
+
+    @GetMapping("/dashboard")
+    String getDashboard() {
+        return "dashboard";
+    }
 }
