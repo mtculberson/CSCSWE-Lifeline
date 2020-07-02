@@ -69,4 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public ActiveUserStore activeUserStore(){
+        return new ActiveUserStore();
+    }
 }

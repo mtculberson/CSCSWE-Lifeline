@@ -5,7 +5,8 @@
       xmlns:th="http://www.thymeleaf.org"
       data-wf-page="5ef28817d931a3743b033cdf"
       data-wf-site="5ef28817d931a31fcc033ce0"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link th:href="@{css/normalize.css}" rel="stylesheet" type="text/css">
@@ -22,7 +23,15 @@
 <header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
     <div data-collapse="medium" data-animation="over-right" data-duration="400" data-doc-height="1" role="banner" class="navbar w-nav">
         <div class="nav-holder"><a href="index" aria-current="page" class="brand w-nav-brand w--current"><img th:src="@{images/type.svg}" width="128" alt="" class="type"></a>
-            <nav role="navigation" class="navmenu w-nav-menu"><a href="sign-in" class="navlink w-nav-link">Sign in</a><a href="sign-up" class="navlink lastcta w-nav-link">Create an account</a></nav>
+            <div sec:authorize="isAnonymous()">
+                <nav role="navigation" class="navmenu w-nav-menu"><a href="sign-in" class="navlink w-nav-link">Sign in</a><a href="sign-up" class="navlink lastcta w-nav-link">Create an account</a></nav>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <nav role="navigation" class="navmenu w-nav-menu"><a href="javascript: document.logoutForm.submit()" class="navlink w-nav-link">Log Out</a></nav>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form>
+            </div>
             <div class="menubutton w-nav-button">
                 <div class="icon w-icon-nav-menu"></div>
             </div>
