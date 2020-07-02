@@ -7,20 +7,32 @@ import com.project.lifeline.Models.Users;
 import com.project.lifeline.Repositories.ContactRepository;
 import com.project.lifeline.Repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 @Service
 public class UsersService {
+
+    @Autowired
+    private EntityManager manager;
 
     @Autowired
     private UsersRepository usersRepository;
 
     @Autowired
     private ContactRepository contactRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Users createNewUser(RegisterUserModel model) {
         Contact contact = new Contact();
@@ -31,8 +43,8 @@ public class UsersService {
         this.contactRepository.save(contact);
 
         Users user = new Users();
-        //user.setPassword(model.getPassword()); THIS NEEDS TO BE HASHED FIRST
-        user.setEmail(model.getEmail());
+        user.setPassword(passwordEncoder.encode(model.getPassword()).getBytes());
+        user.setUsername(model.getUsername());
         user.setRole("USER");
         user.setContactId(contact.getContactId());
         this.usersRepository.save(user);
@@ -40,8 +52,5 @@ public class UsersService {
         return user;
     }
 
-    public boolean signIn(SignInUserModel model) {
 
-        return false;
-    }
 }

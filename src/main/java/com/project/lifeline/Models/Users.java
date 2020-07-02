@@ -13,8 +13,8 @@ public class Users {
     private UUID UserId;
 
 
-    @Column(name = "EMAIL" , columnDefinition="nvarchar")
-    private String Email;
+    @Column(name = "Username" , columnDefinition="nvarchar")
+    private String Username;
 
     @Column(name = "PASSWORD" , columnDefinition="varbinary")
     private byte[] Password;
@@ -44,12 +44,12 @@ public class Users {
         UserId = userId;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setUsername(String username) {
+        Username = username;
     }
 
     public byte[] getPassword() {

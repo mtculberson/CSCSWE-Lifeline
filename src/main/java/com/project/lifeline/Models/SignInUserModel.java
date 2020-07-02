@@ -9,7 +9,7 @@ public class SignInUserModel {
     
     @Email
     @NotNull
-    private String Email;
+    private String Username;
 
     @NotNull
     private String Password;
@@ -22,12 +22,12 @@ public class SignInUserModel {
         UserId = userId;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setUsername(String username) {
+        Username = username;
     }
 
     public String getPassword() {

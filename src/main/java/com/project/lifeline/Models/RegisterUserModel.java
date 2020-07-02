@@ -24,7 +24,7 @@ public class RegisterUserModel {
 
     @Email
     @NotNull
-    private String Email;
+    private String Username;
 
     @NotNull
     @Size(min = 1, max = 20)
@@ -60,12 +60,12 @@ public class RegisterUserModel {
         LastName = lastName;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setUsername(String username) {
+        Username = username;
     }
 
     public String getPhoneNumber() {

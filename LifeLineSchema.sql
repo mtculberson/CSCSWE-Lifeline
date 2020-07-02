@@ -39,7 +39,8 @@ CREATE TABLE dbo.[users] (
      [USER_ID] uniqueidentifier NOT NULL
          CONSTRAINT PK_users_USER_ID PRIMARY KEY
          CONSTRAINT DF_users_USER_ID DEFAULT newsequentialid(),
-     [EMAIL] nvarchar(max) NOT NULL,
+     [USERNAME] nvarchar(max) NOT NULL,
+     [ENABLED] bit DEFAULT 1,
      [PASSWORD] varbinary(max) NULL,
      [ROLE] nvarchar(255) NOT NULL,
      [CONTACT_ID] uniqueidentifier NOT NULL
