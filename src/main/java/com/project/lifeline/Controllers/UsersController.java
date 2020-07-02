@@ -60,4 +60,19 @@ public class UsersController {
     String getDashboard() {
         return "dashboard";
     }
+
+    @GetMapping("/addcontact")
+    String getAddContact(){
+        return "addcontact";
+    }
+
+    @GetMapping("/deletecontact")
+    String getDeleteContact(){
+        return "deletecontact";
+    }
+    @GetMapping("/updatecontact")
+    String getUpdateContact(){
+        return "updatecontact";
+    }
+
 }
