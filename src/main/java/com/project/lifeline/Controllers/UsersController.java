@@ -62,4 +62,19 @@ public class UsersController {
         String username = user.getName();
         return "dashboard";
     }
+
+    @GetMapping("/addcontact")
+    String getAddContact(){
+        return "addcontact";
+    }
+
+    @GetMapping("/deletecontact")
+    String getDeleteContact(){
+        return "deletecontact";
+    }
+    @GetMapping("/updatecontact")
+    String getUpdateContact(){
+        return "updatecontact";
+    }
+
 }
