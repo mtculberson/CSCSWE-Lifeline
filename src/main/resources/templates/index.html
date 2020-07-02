@@ -5,6 +5,7 @@
       data-wf-page="5ef28817d931a3743b033cdf"
       data-wf-site="5ef28817d931a31fcc033ce0"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       layout:decorate="~{layout}">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,9 +18,16 @@
       <div class="tag-line-2">Lifeline</div>
       <div class="headhero-2">An emergency call system<br>that save people&#x27;s lives.</div>
       <div class="subheading-2">This is an application that you activate before you might get into an emergency situation.</div>
-      <a href="sign-up" class="link-block-4 w-inline-block">
-        <div class="btn-2">Create an account</div>
-      </a>
+      <div sec:authorize="isAnonymous()">
+        <a href="sign-up" class="link-block-4 w-inline-block">
+          <div class="btn-2">Create an account</div>
+        </a>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+        <a href="dashboard" class="link-block-4 w-inline-block">
+          <div class="btn-2">Go to dashboard</div>
+        </a>
+      </div>
     </div>
   </div>
 </div>
