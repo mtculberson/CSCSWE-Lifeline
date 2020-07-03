@@ -79,6 +79,11 @@ public class UsersController {
         return "dashboard";
     }
 
+    @GetMapping("/emergencycontact")
+    String getEmergencyContact(){
+        return "emergencycontact";
+    }
+
     @GetMapping("/addcontact")
     String getAddContact(){
         return "addcontact";
