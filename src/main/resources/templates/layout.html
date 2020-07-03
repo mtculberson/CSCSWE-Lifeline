@@ -10,6 +10,7 @@
 <head>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link th:href="@{css/normalize.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{css/main.css}" rel="stylesheet" type="text/css">
     <link th:href="@{css/components.css}" rel="stylesheet" type="text/css">
     <link th:href="@{css/swe-lifeline.css}" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -20,6 +21,7 @@
     <link th:href="@{images/webclip.png}" rel="apple-touch-icon">
 </head>
 <body>
+<div id="page-container">
 <header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
     <div data-collapse="medium" data-animation="over-right" data-duration="400" data-doc-height="1" role="banner" class="navbar w-nav">
         <div class="nav-holder"><a href="index" aria-current="page" class="brand w-nav-brand w--current"><img th:src="@{images/type.svg}" width="128" alt="" class="type"></a>
@@ -38,8 +40,8 @@
         </div>
     </div>
 </header>
-    <div layout:fragment="content"></div>
-<div th:fragment="footer" class="footer" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div layout:fragment="content" id="content-wrap"></div>
+<div th:fragment="footer" class="footer" id="footer" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="footersection">
         <div class="footerpart w-container">
             <div class="w-row">
@@ -49,6 +51,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5ef28817d931a31fcc033ce0" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script th:src="@{js/swe-lifeline.js}" type="text/javascript"></script>

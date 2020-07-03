@@ -4,6 +4,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public class Contact {
     @Column(name = "LAST_NAME", columnDefinition="nvarchar(255)")
     private String LastName;
 
+    @Pattern(regexp="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "Input does not match phone number format.")
     @Column(name = "PHONE_NUMBER" , columnDefinition="nvarchar(20)")
     private String PhoneNumber;
 
