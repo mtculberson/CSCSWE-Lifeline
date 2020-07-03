@@ -25,9 +25,6 @@ import java.util.List;
 public class UsersService {
 
     @Autowired
-    private EntityManager manager;
-
-    @Autowired
     private UsersRepository usersRepository;
 
     @Autowired

@@ -1,7 +1,10 @@
 package com.project.lifeline.Controllers;
 
+import com.project.lifeline.Models.Contact;
 import com.project.lifeline.Models.RegisterUserModel;
 import com.project.lifeline.Models.Users;
+import com.project.lifeline.Services.ContactService;
+import com.project.lifeline.Services.EmergencyContactService;
 import org.hibernate.Query;
 import org.springframework.security.core.Authentication;
 import com.project.lifeline.Models.SignInUserModel;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -77,25 +81,6 @@ public class UsersController {
     String getDashboard(Authentication user) {
         String username = user.getName();
         return "dashboard";
-    }
-
-    @GetMapping("/emergencycontact")
-    String getEmergencyContact(){
-        return "emergencycontact";
-    }
-
-    @GetMapping("/addcontact")
-    String getAddContact(){
-        return "addcontact";
-    }
-
-    @GetMapping("/deletecontact")
-    String getDeleteContact(){
-        return "deletecontact";
-    }
-    @GetMapping("/updatecontact")
-    String getUpdateContact(){
-        return "updatecontact";
     }
 
 }

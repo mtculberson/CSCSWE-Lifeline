@@ -13,70 +13,28 @@
 </head>
 <body>
 <div layout:fragment="content">
-
-    <div class="section">
-        <div class="div-block-4"></div>
-    </div>
     <section class="cards-section">
         <div class="centered-container w-container">
-            <div class="headhero-left">Emergency Contact</div>
             <div class="w-row">
-                <div class="w-col w-col-6"></div>
-                <div class="w-clearfix w-col w-col-6"><a href="#" class="button-3 w-button">Add Contact</a></div>
+                <a href="addcontact" class="link-block-4" >
+                    <div class="btn-2" style="margin-top:30px;margin-bottom:50px;background-color:#a36b5a">Add Contact</div>
+                </a>
             </div>
-            <div class="cards-grid-container-2">
-                <div id="w-node-8c703eaea963-74abb65f">
-                    <div class="econteact-holder">
-                        <div class="hero-text-holder">
-                            <div class="w-form">
-                                <form id="email-form" name="email-form" data-name="Email Form" class="form">Contact Name</label>
-                                    <h3>First Last</h3>Phone Number</label>
-                                    <h3>Phone Number</h3>
-                                    <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
-                                </form>
-                                <div class="w-form-done">
-                                    <div>Thank you! Your submission has been received!</div>
-                                </div>
-                                <div class="w-form-fail">
-                                    <div>Oops! Something went wrong while submitting the form.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="w-node-8c703eaea96a-74abb65f">
-                    <div class="econteact-holder">
-                        <div class="hero-text-holder">
-                            <div class="w-form">
-                                <form class="form">Contact Name</label>
-                                    <h3>First Last</h3>Phone Number</label>
-                                    <h3>Phone Number</h3>
-                                    <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
-                                </form>
-                                <div class="w-form-done">
-                                    <div>Thank you! Your submission has been received!</div>
-                                </div>
-                                <div class="w-form-fail">
-                                    <div>Oops! Something went wrong while submitting the form.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="w-node-8c703eaea971-74abb65f">
-                    <div class="econteact-holder">
-                        <div class="hero-text-holder">
-                            <div class="w-form">
-                                <form class="form">Contact Name</label>
-                                    <h3>First Last</h3>Phone Number</label>
-                                    <h3>Phone Number</h3>
-                                    <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
-                                </form>
-                                <div class="w-form-done">
-                                    <div>Thank you! Your submission has been received!</div>
-                                </div>
-                                <div class="w-form-fail">
-                                    <div>Oops! Something went wrong while submitting the form.</div>
+            <div class="subheading-center" th:if="${#lists.isEmpty(contacts)}" style="padding-top: 50px;color:red;">You have no contacts! Please add some.</div>
+            <div th:if="!${#lists.isEmpty(contacts)}">
+                <div class="cards-grid-container-2">
+                    <div id="w-node-8c703eaea963-74abb65f" th:each="contact: ${contacts}" >
+                        <div class="econteact-holder">
+                            <div class="hero-text-holder">
+                                <div class="w-form">
+                                    <form id="email-form" name="email-form" data-name="Email Form" class="form">
+                                        <h5>Contact Name:</h5>
+                                        <td th:text="${contact.getFirstName() + ' ' + contact.getLastName()}" />
+                                        <br/>
+                                        <h5>Phone Number:</h5>
+                                        <td th:text="${contact.getPhoneNumber()}"/>
+                                        <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -85,51 +43,26 @@
             </div>
         </div>
     </section>
-    <div class="phone-emergency">
-        <div class="headhero-left">Emergency Contact</div>
-        <div class="button-section w-clearfix"><a href="#" class="button-3 w-button">Add Contact</a></div>
-        <section class="phone-cards-section">
+    <div class="phone-emergency phone-sign--up w-container">
+        <a href="addcontact" class="link-block-4" >
+            <div class="btn-2" style="margin-top:30px;margin-bottom:50px;background-color:#a36b5a">Add Contact</div>
+        </a>
+        <div  th:if="${#lists.isEmpty(contacts)}">
+            <div class="subheading-center" style="padding-top: 50px;color:red">You have no contacts! Please add some.</div>
+        </div>
+        <div th:if="!${#lists.isEmpty(contacts)}">
+        <section class="phone-cards-section" th:each="contact: ${contacts}">
             <div class="w-form">
-                <form class="form">Contact Name</label>
-                    <h3>First Last</h3>Phone Number</label>
-                    <h3>Phone Number</h3>
+                <form class="form">
+                    <h5>Contact Name:</h5>
+                    <td th:text="${contact.getFirstName() + ' ' + contact.getLastName()}" />
+                    <br/>
+                    <h5>Phone Number:</h5>
+                    <td th:text="${contact.getPhoneNumber()}"/>
                     <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
                 </form>
-                <div class="w-form-done">
-                    <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div class="w-form-fail">
-                    <div>Oops! Something went wrong while submitting the form.</div>
-                </div>
             </div>
         </section>
-        <section class="phone-cards-section">
-            <div class="w-form">
-                <form class="form">Contact Name</label>
-                    <h3>First Last</h3>Phone Number</label>
-                    <h3>Phone Number</h3>
-                    <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
-                </form>
-                <div class="w-form-done">
-                    <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div class="w-form-fail">
-                    <div>Oops! Something went wrong while submitting the form.</div>
-                </div>
-            </div>
-        </section>
-        <div class="w-form">
-            <form class="form">Contact Name</label>
-                <h3>First Last</h3>Phone Number</label>
-                <h3>Phone Number</h3>
-                <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
-            </form>
-            <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
         </div>
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5ef28817d931a31fcc033ce0" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

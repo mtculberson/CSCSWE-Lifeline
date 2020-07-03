@@ -27,7 +27,7 @@
                 <nav role="navigation" class="navmenu w-nav-menu"><a href="sign-in" class="navlink w-nav-link">Sign in</a><a href="sign-up" class="navlink lastcta w-nav-link">Create an account</a></nav>
             </div>
             <div sec:authorize="isAuthenticated()">
-                <nav role="navigation" class="navmenu w-nav-menu"><a href="javascript: document.logoutForm.submit()" class="navlink w-nav-link">Log Out</a></nav>
+                <nav role="navigation" class="navmenu w-nav-menu"><a href="javascript: document.logoutForm.submit()" class="navlink w-nav-link">Log Out</a><a href="dashboard" class="navlink w-nav-link">Dashboard</a></nav>
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                     <input hidden type="submit" value="Sign Out"/>
                 </form>
