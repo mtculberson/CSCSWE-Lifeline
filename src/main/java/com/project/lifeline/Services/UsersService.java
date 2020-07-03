@@ -18,6 +18,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UsersService {
@@ -50,6 +52,16 @@ public class UsersService {
         this.usersRepository.save(user);
 
         return user;
+    }
+
+    public List<Users> findAll() {
+
+        Iterable<Users> it = usersRepository.findAll();
+
+        ArrayList<Users> users = new ArrayList<Users>();
+        it.forEach(e -> users.add(e));
+
+        return users;
     }
 
 

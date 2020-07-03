@@ -1,16 +1,16 @@
 package com.project.lifeline.Models;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.validation.Errors;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
+import javax.validation.Validator;
+import javax.validation.constraints.*;
 
 import java.util.UUID;
 
-public class RegisterUserModel {
+public class RegisterUserModel{
     private UUID UserId;
 
     @NotNull
@@ -22,11 +22,11 @@ public class RegisterUserModel {
     @Size(min = 1, max = 255)
     private String LastName;
 
-    @Email
+    @Email(message = "Must be a valid e-mail address.")
     @NotNull
     private String Username;
 
-    @NotNull
+    @Pattern(regexp="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "Input does not match phone number format.")
     @Size(min = 1, max = 20)
     private String PhoneNumber;
 
@@ -91,4 +91,5 @@ public class RegisterUserModel {
     public void setConfirmPassword(String confirmPassword) {
         ConfirmPassword = confirmPassword;
     }
+
 }

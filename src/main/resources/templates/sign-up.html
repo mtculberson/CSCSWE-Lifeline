@@ -15,40 +15,40 @@
   <div class="box-holder">
     <div class="headhero-center">Create an account</div>
     <div class="hero-text-holder">
-          <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+          <form action="#" th:action="@{/sign-up}" th:object="${registerUserModel}" method="post">
             <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
-
+            <label class="field-label-2" th:if="${#fields.hasErrors('FirstName')}" th:errors="*{FirstName}" style="color:red"></label>
             <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
-
+            <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
             <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Username}" /></label>
-
+            <label class="field-label-2" th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}" style="color:red"></label>
             <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
-
-            <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
-
-            <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" required="true" th:field="*{ConfirmPassword}" /></label>
-
-            <input class="btn" type="submit" value="Create an account" />
+            <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" type="" style="color:red"></label>
+            <label class="field-label-2">Password: <input type="password" id="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+            <label class="field-label-2" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}" style="color:red"></label>
+            <label class="field-label-2">Confirm Password: <input type="password" id ="confirmpassword" class="text-field w-input" required="true" th:field="*{ConfirmPassword}" /></label>
+            <label class="field-label-2" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{ConfirmPassword}" style="color:red"></label>
+            <input class="btn" type="submit" id="button" value="Create an account" />
           </form>
     </div>
   </div>
   <div class="phone-sign--up w-container">
     <div class="hero-text-holder">
       <div class="headhero-center">Create an account</div>
-      <form action="#" th:action="@{/sign-up}" th:object="${user}" method="post">
+      <form action="#" th:action="@{/sign-up}" th:object="${registerUserModel}" method="post">
         <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
-
+        <label class="field-label-2" th:if="${#fields.hasErrors('FirstName')}" th:errors="*{FirstName}" style="color:red"></label>
         <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
-
+        <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
         <label class="field-label-2">Email: <input type="text" class="text-field w-input" required="true" th:field="*{Username}" /></label>
-
+        <label class="field-label-2" th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}" style="color:red"></label>
         <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
-
-        <label class="field-label-2">Password: <input type="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
-
-        <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" required="true" th:field="*{ConfirmPassword}" /></label>
-
-        <input class="btn" type="submit" value="Create an account" />
+        <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" style="color:red"></label>
+        <label class="field-label-2">Password: <input type="password" id="password" class="text-field w-input" required="true" th:field="*{Password}" /></label>
+        <label class="field-label-2" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}" style="color:red"></label>
+        <label class="field-label-2">Confirm Password: <input type="password" id ="confirmpassword" class="text-field w-input" required="true" th:field="*{ConfirmPassword}" /></label>
+        <label class="field-label-2" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{ConfirmPassword}" style="color:red"></label>
+        <input class="btn" type="submit" id="button" value="Create an account" />
       </form>
     </div>
   </div>
