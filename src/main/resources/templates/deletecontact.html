@@ -12,6 +12,37 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <div class="box-holder">
+        <div class="headhero-center">Delete Contact</div>
+        <div class="hero-text-holder">
+            <form action="#" th:action="@{/deletecontact}" th:object="${contact}" method="post">
+                <input type="hidden" th:field="*{ContactId}" />
+                <label class="field-label-2" th:text="'First Name: ' + *{FirstName}"></label>
 
+                <label class="field-label-2" th:text="'Last Name: ' + *{LastName}"></label>
+
+                <label class="field-label-2" th:text="'Phone Number: ' + *{PhoneNumber}"></label>
+
+                <input class="btn" type="submit" id="button" value="Delete Contact" />
+            </form>
+        </div>
+    </div>
+    <div class="phone-sign--up w-container">
+        <div class="hero-text-holder">
+            <div class="headhero-center">Delete Contact</div>
+            <form action="#" th:action="@{/deletecontact}" th:object="${contact}" method="post">
+                <input type="hidden" th:field="*{ContactId}" />
+
+                <label class="field-label-2" th:text="'First Name: ' + *{FirstName}"></label>
+
+                <label class="field-label-2" th:text="'Last Name: ' + *{LastName}"></label>
+
+                <label class="field-label-2" th:text="'Phone Number: ' + *{PhoneNumber}"></label>
+
+                <input class="btn" type="submit" id="button" value="Delete Contact" />
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

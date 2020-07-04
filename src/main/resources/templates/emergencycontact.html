@@ -34,7 +34,7 @@
                                         <br/>
                                         <h5>Phone Number:</h5>
                                         <td th:text="${contact.getPhoneNumber()}"/>
-                                        <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
+                                        <p class="paragraph-2"><a th:href="@{/updatecontact(id=${contact.getContactId()})}">Edit</a> | <a th:href="@{/deletecontact(id=${contact.getContactId()})}">Delete</a></p>
                                     </form>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                     <br/>
                     <h5>Phone Number:</h5>
                     <td th:text="${contact.getPhoneNumber()}"/>
-                    <p class="paragraph-2"><a href="#">Edit</a> | <a href="#">Delete</a></p>
+                    <p class="paragraph-2"><a th:href="@{/updatecontact(id=${contact.getContactId()})}">Edit</a> | <a th:href="@{/deletecontact(id=${contact.getContactId()})}">Delete</a></p>
                 </form>
             </div>
         </section>

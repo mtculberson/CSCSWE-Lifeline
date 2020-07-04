@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ContactController {
@@ -46,16 +47,45 @@ public class ContactController {
         contactService.createNewContact(contact, auth);
         List<Contact> contacts = contactService.findEmergencyContacts(auth);
         model.addAttribute("contacts", contacts);
-        return "/emergencycontact";
+        return "emergencycontact";
     }
 
     @GetMapping("/deletecontact")
-    String getDeleteContact(){
+    String getDeleteContact(String id, Model model){
+        UUID contactId = UUID.fromString(id);
+        Contact contact = contactService.getContactById(contactId);
+        model.addAttribute("contact", contact);
         return "deletecontact";
     }
 
+    @PostMapping("/deletecontact")
+    String postDeleteContact(@Valid @ModelAttribute("contact") Contact contact, Model model, Authentication auth){
+        contactService.deleteContact(contact);
+
+        List<Contact> contacts = contactService.findEmergencyContacts(auth);
+        model.addAttribute("contacts", contacts);
+        return "emergencycontact";
+    }
+
     @GetMapping("/updatecontact")
-    String getUpdateContact(){
+    String getUpdateContact(String id, Model model){
+        UUID contactId = UUID.fromString(id);
+        Contact contact = contactService.getContactById(contactId);
+        model.addAttribute("contact", contact);
         return "updatecontact";
     }
+
+    @PostMapping("/updatecontact")
+    String postUpdateContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult results, Model model, Authentication auth) {
+        if(results.hasErrors()){
+            return "addcontact";
+        }
+
+        contactService.updateContact(contact);
+        List<Contact> contacts = contactService.findEmergencyContacts(auth);
+        model.addAttribute("contacts", contacts);
+        return "emergencycontact";
+    }
+
+
 }

@@ -16,6 +16,7 @@ import java.net.Authenticator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ContactService {
@@ -37,6 +38,18 @@ public class ContactService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public Contact getContactById(UUID id){
+        List<Contact> contacts = this.findAll();
+        Contact contact = new Contact();
+        for (int i = 0; i < contacts.size(); i++){
+            if(contacts.get(i).getContactId().equals(id)){
+                return contacts.get(i);
+            }
+        }
+
+        return contact;
+    }
 
     public Contact createNewContact(Contact model, Authentication auth){
         Contact contact = new Contact();
@@ -61,6 +74,27 @@ public class ContactService {
         this.emergencyContactRepository.save(eContact);
 
         return model;
+    }
+
+    public void updateContact(Contact model){
+        model.setUpdatedOn(LocalDateTime.now());
+        this.contactRepository.save(model);
+    }
+
+    public void deleteContact(Contact model){
+        Contact contact = getContactById(model.getContactId());
+        List<EmergencyContact> eContacts = this.eService.findAll();
+        EmergencyContact eContact = new EmergencyContact();
+
+        for(int i = 0; i < eContacts.size(); i++){
+            if(eContacts.get(i).getContactId().equals(contact.getContactId())){
+                eContact = eContacts.get(i);
+            }
+        }
+
+        this.emergencyContactRepository.delete(eContact);
+        this.contactRepository.delete(contact);
+
     }
 
     public List<Contact> findAll() {

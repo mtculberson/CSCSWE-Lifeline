@@ -36,7 +36,7 @@
                 <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
                 <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
                 <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" style="color:red"></label>
-                <input class="btn" type="submit" id="button" href="emergencycontact" value="Add Contact" />
+                <input class="btn" type="submit" id="button" value="Add Contact" />
             </form>
         </div>
     </div>

@@ -8,10 +8,42 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="utf-8">
-    <title>Add Contact</title>
+    <title>Edit Contact</title>
 </head>
 <body>
 <div layout:fragment="content">
-
+    <div class="box-holder">
+        <div class="headhero-center">Edit Contact</div>
+        <div class="hero-text-holder">
+            <form action="#" th:action="@{/updatecontact}" th:object="${contact}" method="post">
+                <input type="hidden" th:field="*{ContactId}" />
+                <input type="hidden" th:field="*{CreatedOn}" />
+                <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('FirstName')}" th:errors="*{FirstName}" style="color:red"></label>
+                <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
+                <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" type="" style="color:red"></label>
+                <input class="btn" type="submit" id="button" value="Edit Contact" />
+            </form>
+        </div>
+    </div>
+    <div class="phone-sign--up w-container">
+        <div class="hero-text-holder">
+            <div class="headhero-center">Edit Contact</div>
+            <form action="#" th:action="@{/updatecontact}" th:object="${contact}" method="post">
+                <input type="hidden" th:field="*{ContactId}" />
+                <input type="hidden" th:field="*{CreatedOn}" />
+                <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('FirstName')}" th:errors="*{FirstName}" style="color:red"></label>
+                <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
+                <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" style="color:red"></label>
+                <input class="btn" type="submit" id="button" value="Edit Contact" />
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
