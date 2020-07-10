@@ -13,7 +13,7 @@
 <body>
 <div layout:fragment="content">
     <div class="box-holder">
-        <div class="headhero-center">Account Settings</div>
+        <div class="headhero-center">Edit Account</div>
         <div class="hero-text-holder">
             <form action="#" th:action="@{/accountsettings}" th:object="${account}" method="post">
                 <input type="hidden" th:field="*{UserId}" />
@@ -43,7 +43,7 @@
     </div>
     <div class="phone-sign--up w-container">
         <div class="hero-text-holder">
-            <div class="headhero-center">Edit Contact</div>
+            <div class="headhero-center">Edit Account</div>
             <form action="#" th:action="@{/accountsettings}" th:object="${account}" method="post">
                 <input type="hidden" th:field="*{UserId}" />
                 <input type="hidden" th:field="*{ContactId}" />
