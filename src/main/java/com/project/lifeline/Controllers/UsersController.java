@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import com.project.lifeline.Models.SignInUserModel;
 import com.project.lifeline.Services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,14 +19,23 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class UsersController {
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private ContactService contactService;
+
+    @Autowired
+    private EmergencyContactService emergencyContactService;
 
     @GetMapping("/sign-up")
     public String getSignUp(Model model){
@@ -35,12 +45,10 @@ public class UsersController {
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
     public ModelAndView postSignUp(@Valid @ModelAttribute("registerUserModel") RegisterUserModel registerUserModel,BindingResult results, ModelAndView modelAndView){
-        List<Users> users = usersService.findAll();
-        for (int i = 0; i < users.size(); i++){
-            if (registerUserModel.getUsername().equals(users.get(i).getUsername())){
-                results.addError(new FieldError("registerUserModel", "Username", registerUserModel.getUsername(), false, null, null, "Email already exists in database."));
-            }
-        }
+        Users user = usersService.findUserByUsername(registerUserModel.getUsername());
+        if (user != null)
+            results.addError(new FieldError("registerUserModel", "Username", registerUserModel.getUsername(), false, null, null, "Email already exists in database."));
+
 
         if (!registerUserModel.getPassword().equals(registerUserModel.getConfirmPassword()))
             results.addError(new FieldError("registerUserModel", "ConfirmPassword", registerUserModel.getPassword(), false, null, null, "Passwords do not match."));
@@ -72,15 +80,82 @@ public class UsersController {
         return modelAndView;
     }
 
-    @RequestMapping("/forgot")
-    String getForgot() {
-        return "forgot";
-    }
-
     @GetMapping("/dashboard")
     String getDashboard(Authentication user) {
         String username = user.getName();
         return "dashboard";
+    }
+
+    @GetMapping("/accountsettings")
+    public String getAccountSettings(Model model, Authentication user) {
+        String username = user.getName();
+        Users userInfo = usersService.findUserByUsername(username);
+        Contact contactInfo = contactService.getContactById(userInfo.getContactId());
+
+        RegisterUserModel account = new RegisterUserModel();
+        account.setFirstName(contactInfo.getFirstName());
+        account.setLastName(contactInfo.getLastName());
+        account.setUserId(userInfo.getUserId());
+        account.setContactId(userInfo.getContactId());
+        account.setPhoneNumber(contactInfo.getPhoneNumber());
+        account.setUsername(userInfo.getUsername());
+        account.setCreatedOn(contactInfo.getCreatedOn());
+
+        model.addAttribute("account", account);
+
+        return "accountsettings";
+    }
+
+    @RequestMapping(value = "/accountsettings", method = RequestMethod.POST)
+    public ModelAndView postAccountSettings(@Valid @ModelAttribute("account") RegisterUserModel registerUserModel, BindingResult results, ModelAndView modelAndView, Authentication auth) {
+        if (!registerUserModel.getUsername().equals(auth.getName()))
+            results.addError(new FieldError("registerUserModel", "Username", registerUserModel.getUsername(), false, null, null, "You cannot change your Email."));
+
+        if (!registerUserModel.getPassword().equals(registerUserModel.getConfirmPassword()))
+            results.addError(new FieldError("account", "ConfirmPassword", registerUserModel.getPassword(), false, null, null, "Passwords do not match."));
+
+        if(results.hasErrors()){
+            modelAndView.setViewName("accountsettings");
+            return modelAndView;
+        }
+
+        this.usersService.updateUser(registerUserModel);
+
+        modelAndView.setViewName("dashboard");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/confirmdelete")
+    public String getConfirmDelete(Model model, Authentication auth) {
+        String username = auth.getName();
+        Users userInfo = usersService.findUserByUsername(username);
+        Contact contactInfo = contactService.getContactById(userInfo.getContactId());
+
+        RegisterUserModel account = new RegisterUserModel();
+        account.setFirstName(contactInfo.getFirstName());
+        account.setLastName(contactInfo.getLastName());
+        account.setUserId(userInfo.getUserId());
+        account.setContactId(userInfo.getContactId());
+        account.setPhoneNumber(contactInfo.getPhoneNumber());
+        account.setUsername(userInfo.getUsername());
+        account.setCreatedOn(contactInfo.getCreatedOn());
+
+        model.addAttribute("account", account);
+
+        return "confirmdelete";
+    }
+
+    @GetMapping(value = "/deleteaccount")
+    public String getDeleteAccount(HttpServletRequest request, HttpServletResponse response, Authentication auth) {
+        new SecurityContextLogoutHandler().logout(request, response, auth);
+
+        Users user = this.usersService.findUserByUsername(auth.getName());
+        Contact contact = this.contactService.getContactById(user.getContactId());
+        this.emergencyContactService.deleteEmergencyContacts(user.getUserId());
+        this.usersService.deleteUser(user);
+        this.contactService.deleteContactsForUser(contact);
+
+        return "login";
     }
 
 }

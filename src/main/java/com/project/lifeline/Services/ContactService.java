@@ -97,6 +97,10 @@ public class ContactService {
 
     }
 
+    public void deleteContactsForUser(Contact model){
+        this.contactRepository.delete(model);
+    }
+
     public List<Contact> findAll() {
 
         Iterable<Contact> it = contactRepository.findAll();

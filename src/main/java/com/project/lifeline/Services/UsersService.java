@@ -61,5 +61,39 @@ public class UsersService {
         return users;
     }
 
+    public Users findUserByUsername(String username){
+        List<Users> users = findAll();
+
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUsername().equals(username)){
+                return users.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public void updateUser(RegisterUserModel model){
+        Contact contact = new Contact();
+        contact.setContactId(model.getContactId());
+        contact.setFirstName(model.getFirstName());
+        contact.setLastName(model.getLastName());
+        contact.setPhoneNumber(model.getPhoneNumber());
+        contact.setCreatedOn(model.getCreatedOn());
+        contact.setUpdatedOn(LocalDateTime.now());
+        this.contactRepository.save(contact);
+
+        Users user = new Users();
+        user.setUserId(model.getUserId());
+        user.setPassword(passwordEncoder.encode(model.getPassword()));
+        user.setUsername(model.getUsername());
+        user.setContactId(model.getContactId());
+        user.setRole("USER");
+        this.usersRepository.save(user);
+    }
+
+    public void deleteUser(Users model){
+        this.usersRepository.delete(model);
+    }
 
 }

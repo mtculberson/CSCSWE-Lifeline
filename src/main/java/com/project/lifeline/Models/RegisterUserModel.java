@@ -1,17 +1,22 @@
 package com.project.lifeline.Models;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.validation.Errors;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.Validator;
 import javax.validation.constraints.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class RegisterUserModel{
     private UUID UserId;
+
+    private UUID ContactId;
 
     @NotNull
     @NotBlank
@@ -36,12 +41,41 @@ public class RegisterUserModel{
     @NotNull
     private String ConfirmPassword;
 
+    private LocalDateTime CreatedOn;
+
+    private LocalDateTime UpdatedOn;
+
+
+    public LocalDateTime getCreatedOn() {
+        return CreatedOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        CreatedOn = createdOn;
+    }
+
+    public LocalDateTime getUpdatedOn() {
+        return UpdatedOn;
+    }
+
+    public void setUpdatedOn(LocalDateTime updatedOn) {
+        UpdatedOn = updatedOn;
+    }
+
     public UUID getUserId() {
         return UserId;
     }
 
     public void setUserId(UUID userId) {
         UserId = userId;
+    }
+
+    public UUID getContactId() {
+        return ContactId;
+    }
+
+    public void setContactId(UUID contactId) {
+        ContactId = contactId;
     }
 
     public String getFirstName() {

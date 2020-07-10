@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      data-wf-page="5ef28817d931a3743b033cdf"
+      data-wf-site="5ef28817d931a31fcc033ce0"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Account Settings</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="box-holder">
+        <div class="headhero-center">Account Settings</div>
+        <div class="hero-text-holder">
+            <form action="#" th:action="@{/accountsettings}" th:object="${account}" method="post">
+                <input type="hidden" th:field="*{UserId}" />
+                <input type="hidden" th:field="*{ContactId}" />
+                <input type="hidden" th:field="*{CreatedOn}" />
+                <input type="hidden" th:field="*{Username}" />
+                <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('FirstName')}" th:errors="*{FirstName}" style="color:red"></label>
+                <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
+                <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" type="" style="color:red"></label>
+                <label class="field-label-2">Email: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}" type="" style="color:red"></label>
+                <label class="field-label-2">Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}" type="" style="color:red"></label>
+                <label class="field-label-2">Confirm Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{ConfirmPassword}" type="" style="color:red"></label>
+                <input class="btn" type="submit" id="button" value="Edit Account" />
+                <br />
+                <a th:href="@{/confirmdelete}" >
+                    <input class="btn" value="Delete Account" style="background-color:red" />
+                </a>
+            </form>
+        </div>
+    </div>
+    <div class="phone-sign--up w-container">
+        <div class="hero-text-holder">
+            <div class="headhero-center">Edit Contact</div>
+            <form action="#" th:action="@{/accountsettings}" th:object="${account}" method="post">
+                <input type="hidden" th:field="*{UserId}" />
+                <input type="hidden" th:field="*{ContactId}" />
+                <input type="hidden" th:field="*{CreatedOn}" />
+                <input type="hidden" th:field="*{Username}" />
+                <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('FirstName')}" th:errors="*{FirstName}" style="color:red"></label>
+                <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
+                <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" type="" style="color:red"></label>
+                <label class="field-label-2">Email: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled/></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}" type="" style="color:red"></label>
+                <label class="field-label-2">Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}" type="" style="color:red"></label>
+                <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" /></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{ConfirmPassword}" type="" style="color:red"></label>
+                <input class="btn" type="submit" id="button" style="margin-bottom: 0" value="Edit Account" />
+                <br />
+                <a th:href="@{/confirmdelete}">
+                    <input class="btn" value="Delete Account" style="background-color:red" />
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

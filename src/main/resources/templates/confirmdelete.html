@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      data-wf-page="5ef28817d931a3743b033cdf"
+      data-wf-site="5ef28817d931a31fcc033ce0"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Confirm Delete</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="box-holder">
+        <div class="headhero-center" style="color:red">Delete Account?</div>
+        <div class="hero-text-holder">
+            <form action="#" th:action="@{/confirmdelete}" th:object="${account}" method="post">
+                <input type="hidden" th:field="*{UserId}" />
+                <input type="hidden" th:field="*{ContactId}" />
+                <input type="hidden" th:field="*{CreatedOn}" />
+                <input type="hidden" th:field="*{Username}" />
+                <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" disabled /></label>
+
+                <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" disabled /></label>
+
+                <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" disabled /></label>
+
+                <label class="field-label-2">Email: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled /></label>
+
+                <label class="field-label-2">Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" disabled/></label>
+
+                <label class="field-label-2">Confirm Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" disabled/></label>
+
+                <a th:href="@{/deleteaccount(id=${account.getContactId()})}">
+                    <input class="btn" value="Delete Account" style="background-color:red" />
+                </a>
+            </form>
+        </div>
+    </div>
+    <div class="phone-sign--up w-container">
+        <div class="hero-text-holder">
+            <div class="headhero-center" style="color:red">Delete Account?</div>
+            <form action="#" th:action="@{/confirmdelete}" th:object="${account}" method="post">
+                <input type="hidden" th:field="*{UserId}" />
+                <input type="hidden" th:field="*{ContactId}" />
+                <input type="hidden" th:field="*{CreatedOn}" />
+                <input type="hidden" th:field="*{Username}" />
+                <label class="field-label-2">First Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{FirstName}" disabled/></label>
+
+                <label class="field-label-2">Last Name: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{LastName}" disabled/></label>
+
+                <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" disabled /></label>
+
+                <label class="field-label-2">Email: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled/></label>
+
+                <label class="field-label-2">Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" disabled/></label>
+
+                <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" disabled/></label>
+
+                <a th:href="@{/deleteaccount(id=${account.getContactId()})}">
+                    <input class="btn" value="Delete Account" style="background-color:red" />
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
