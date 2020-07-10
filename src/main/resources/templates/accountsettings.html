@@ -26,12 +26,13 @@
                 <label class="field-label-2" th:if="${#fields.hasErrors('LastName')}" th:errors="*{LastName}" style="color:red"></label>
                 <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" /></label>
                 <label class="field-label-2" th:if="${#fields.hasErrors('PhoneNumber')}" th:errors="*{PhoneNumber}" type="" style="color:red"></label>
-                <label class="field-label-2">Email: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled /></label>
+                <label class="field-label-2">Email: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled /></label>
                 <label class="field-label-2" th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}" type="" style="color:red"></label>
-                <label class="field-label-2">Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" /></label>
+                <label class="field-label-2">Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" /></label>
                 <label class="field-label-2" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}" type="" style="color:red"></label>
-                <label class="field-label-2">Confirm Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" /></label>
+                <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" /></label>
                 <label class="field-label-2" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{ConfirmPassword}" type="" style="color:red"></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('UserId')}" th:errors="*{UserId}" style="color:blue"></label>
                 <input class="btn" type="submit" id="button" value="Edit Account" />
                 <br />
                 <a th:href="@{/confirmdelete}" >
@@ -60,6 +61,7 @@
                 <label class="field-label-2" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}" type="" style="color:red"></label>
                 <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" /></label>
                 <label class="field-label-2" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{ConfirmPassword}" type="" style="color:red"></label>
+                <label class="field-label-2" th:if="${#fields.hasErrors('UserId')}" th:errors="*{UserId}" style="color:blue"></label>
                 <input class="btn" type="submit" id="button" style="margin-bottom: 0" value="Edit Account" />
                 <br />
                 <a th:href="@{/confirmdelete}">

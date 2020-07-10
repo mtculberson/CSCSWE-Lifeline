@@ -26,11 +26,11 @@
 
                 <label class="field-label-2">Phone Number: <input type="tel" class="text-field w-input" maxlength="20" required="true" th:field="*{PhoneNumber}" disabled /></label>
 
-                <label class="field-label-2">Email: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled /></label>
+                <label class="field-label-2">Email: <input type="text" class="text-field w-input" maxlength="255" required="true" th:field="*{Username}" disabled /></label>
 
-                <label class="field-label-2">Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" disabled/></label>
+                <label class="field-label-2">Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{Password}" disabled/></label>
 
-                <label class="field-label-2">Confirm Password: <input type="tel" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" disabled/></label>
+                <label class="field-label-2">Confirm Password: <input type="password" class="text-field w-input" maxlength="255" required="true" th:field="*{ConfirmPassword}" disabled/></label>
 
                 <a th:href="@{/deleteaccount(id=${account.getContactId()})}">
                     <input class="btn" value="Delete Account" style="background-color:red" />

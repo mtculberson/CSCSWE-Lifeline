@@ -119,9 +119,12 @@ public class UsersController {
             return modelAndView;
         }
 
+        results.addError(new FieldError("registerUserModel", "UserId", registerUserModel.getUserId(), false, null, null, "Your account has been updated."));
+
         this.usersService.updateUser(registerUserModel);
 
-        modelAndView.setViewName("dashboard");
+        modelAndView.setViewName("accountsettings");
+        modelAndView.addObject("account", registerUserModel);
         return modelAndView;
     }
 
