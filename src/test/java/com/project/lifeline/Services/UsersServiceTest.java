@@ -20,7 +20,7 @@ class UsersServiceTest {
     @Test
     void createNewUser1() {
 
-        //Test case 1: All inputs are empty
+        //Test case 01-01: All inputs are empty
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("");
         register.setLastName("");
@@ -40,7 +40,7 @@ class UsersServiceTest {
     @Test
     void createNewUser2() {
 
-        //Test case 2: All fields are empty except the password field
+        //Test case 01-02: All fields are empty except the password field
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("");
         register.setLastName("");
@@ -60,7 +60,7 @@ class UsersServiceTest {
     @Test
     void createNewUser3() {
 
-        //Test case 3: All fields are empty except the password and phone number fields
+        //Test case 01-03: All fields are empty except the password and phone number fields
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("");
         register.setLastName("");
@@ -80,7 +80,7 @@ class UsersServiceTest {
     @Test
     void createNewUser4() {
 
-        //Test case 4: All fields are empty except the password, email address (username) and phone number fields
+        //Test case 01-04: All fields are empty except the password, email address (username) and phone number fields
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("");
         register.setLastName("");
@@ -100,7 +100,7 @@ class UsersServiceTest {
     @Test
     void createNewUser5() {
 
-        //Test case 5: Password, email address (username) and phone number fields
+        //Test case 01-05: Password, email address (username) and phone number fields
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("");
         register.setLastName("asdjasdkjqwriu31134njetnerkpj(U()(90098asjjjjjjjjjjjj");
@@ -120,7 +120,7 @@ class UsersServiceTest {
     @Test
     void createNewUser6() {
 
-        //Test case 4: All fields are filled, email address has an incorrect format
+        //Test case 01-06: All fields are filled, email address has an incorrect format
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("nerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134" +
                 "njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpja");
@@ -141,7 +141,7 @@ class UsersServiceTest {
     @Test
     void createNewUser7() {
 
-        //Test case 4: All fields are filled, first name is >250 characters
+        //Test case 01-07: All fields are filled, first name is >250 characters
         RegisterUserModel register = new RegisterUserModel();
         register.setFirstName("nerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu" +
                 "31134njetnerkpjasdjasdkjqwriu31134njetnerkpjasdjasdkjqwriu31134njetnerkpjaskldaldijkpqdkjijohwdijdjqiojdwwqjodwqkd89789q8w7dqw9");
@@ -159,19 +159,43 @@ class UsersServiceTest {
         }
     }
 
-//    @Test
-//    void findAll() {
-//    }
-//
-//    @Test
-//    void findUserByUsername() {
-//    }
-//
-//    @Test
-//    void updateUser() {
-//    }
-//
-//    @Test
-//    void deleteUser() {
-//    }
+    @Test
+    void createNewUser8() {
+
+        //Test case 01-08: All fields are formatted and filled out the way they were intended, except phone number format.
+        RegisterUserModel register = new RegisterUserModel();
+        register.setFirstName("Ivan");
+        register.setLastName("Escalona");
+        register.setPhoneNumber("1234567abc");
+        register.setPassword("123@gsu.com");
+        register.setUsername("90098@ajidiajsd.com");
+
+        Users user = new Users();
+
+        try {
+            user = usersService.createNewUser(register);
+        } catch (Exception ex) {
+            assertThat(user.getUserId()).isNull();
+        }
+    }
+
+    @Test
+    void createNewUser9() {
+
+        //Test case 01-09: Base case, all fields are formatted and filled out the way they were intended.
+        RegisterUserModel register = new RegisterUserModel();
+        register.setFirstName("Ivan");
+        register.setLastName("Escalona");
+        register.setPhoneNumber("1234567890");
+        register.setPassword("123@gsu.com");
+        register.setUsername("90098@ajidiajsd.com");
+
+        Users user = new Users();
+
+        try {
+            user = usersService.createNewUser(register);
+        } catch (Exception ex) {
+            assertThat(user.getUserId()).isNotNull();
+        }
+    }
 }
