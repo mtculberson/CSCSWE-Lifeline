@@ -2935,3 +2935,11 @@
   }
 }
 
+
+.video-holder {
+  height: 500px;
+  margin-right: 29px;
+  margin-left: 29px;
+  background-color: #000;
+  color: transparent;
+}
