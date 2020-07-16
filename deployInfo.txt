@@ -11,6 +11,6 @@ command line:
 
 mvnw clean package spring-boot:repackage
 
-eb deploy
+eb deploy --staged
 
 

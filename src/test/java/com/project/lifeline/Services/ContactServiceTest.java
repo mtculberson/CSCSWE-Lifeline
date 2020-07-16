@@ -19,9 +19,6 @@ class ContactServiceTest {
     @Autowired
     private ContactService contactService;
 
-    @Autowired
-    private Authentication auth;
-
     @Test
     void createNewContact1() {
         //Test case 02-01: All fields are empty
@@ -34,7 +31,7 @@ class ContactServiceTest {
         Contact realContact = new Contact();
 
         try {
-            realContact = contactService.createNewContact(contact, auth);
+            realContact = contactService.createNewContactForTest(contact);
         } catch (Exception ex) {
             assertThat(realContact.getContactId()).isNull();
         }
@@ -53,7 +50,7 @@ class ContactServiceTest {
         Contact realContact = new Contact();
 
         try {
-            realContact = contactService.createNewContact(contact, auth);
+            realContact = contactService.createNewContactForTest(contact);
         } catch (Exception ex) {
             assertThat(realContact.getContactId()).isNull();
         }
@@ -71,7 +68,7 @@ class ContactServiceTest {
         Contact realContact = new Contact();
 
         try {
-            realContact = contactService.createNewContact(contact, auth);
+            realContact = contactService.createNewContactForTest(contact);
         } catch (Exception ex) {
             assertThat(realContact.getContactId()).isNull();
         }
@@ -88,7 +85,7 @@ class ContactServiceTest {
         Contact realContact = new Contact();
 
         try {
-            realContact = contactService.createNewContact(contact, auth);
+            realContact = contactService.createNewContactForTest(contact);
         } catch (Exception ex) {
             assertThat(realContact.getContactId()).isNotNull();
         }

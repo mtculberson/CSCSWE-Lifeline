@@ -145,4 +145,28 @@ public class ContactService {
 
         return contacts;
     }
+
+    public Contact createNewContactForTest(Contact model){
+        Contact contact = new Contact();
+        contact.setFirstName(model.getFirstName());
+        contact.setLastName(model.getLastName());
+        contact.setPhoneNumber(model.getPhoneNumber());
+        contact.setCreatedOn(LocalDateTime.now());
+        this.contactRepository.save(contact);
+
+        EmergencyContact eContact = new EmergencyContact();
+        eContact.setContactId(contact.getContactId());
+;
+        List<Users> users = usersService.findAll();
+
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUsername().equals("ivan123@gmail.com")){
+                eContact.setUserId(users.get(i).getUserId());
+            }
+        }
+
+        this.emergencyContactRepository.save(eContact);
+
+        return model;
+    }
 }
