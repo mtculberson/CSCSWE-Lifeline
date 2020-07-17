@@ -55,7 +55,7 @@ CREATE TABLE dbo.[emergency] (
          CONSTRAINT FK_emergency_USER_ID_user_USER_ID REFERENCES dbo.users([USER_ID]),
      [VIDEO_ID] uniqueidentifier NOT NULL
          CONSTRAINT FK_emergency_VIDEO_ID_user_USER_ID REFERENCES dbo.[video]([VIDEO_ID]),
-     [LOCATION_ID] uniqueidentifier NOT NULL
+     [LOCATION_ID] uniqueidentifier NULL
          CONSTRAINT FK_emergency_LOCATION_ID_location_LOCATION_ID REFERENCES dbo.[location](LOCATION_ID),
      [CREATED_ON] datetime NOT NULL
          CONSTRAINT DF_emergency_CREATED_ON DEFAULT getdate()
