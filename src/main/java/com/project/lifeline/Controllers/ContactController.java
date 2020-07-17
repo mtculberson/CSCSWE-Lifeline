@@ -87,5 +87,13 @@ public class ContactController {
         return "emergencycontact";
     }
 
+    @GetMapping("/video")
+    String getVideo(){
+        return "video";
+    }
 
+    @GetMapping("/sendvideo")
+    String getSendVideo(){
+        return "sendvideo";
+    }
 }
