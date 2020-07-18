@@ -110,7 +110,10 @@ public class ContactController {
     }
 
     @GetMapping("/sendvideo")
-    String getSendVideo(){
+    String getSendVideo(Model model, Authentication auth){
+
+        List<Contact> contacts = contactService.findEmergencyContacts(auth);
+        model.addAttribute("contacts", contacts);
         return "sendvideo";
     }
 }

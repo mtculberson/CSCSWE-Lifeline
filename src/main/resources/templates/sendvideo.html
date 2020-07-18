@@ -12,16 +12,29 @@
 </head>
 <body class="body-2">
 <div layout:fragment="content">
-    <div class="box-holder">
-        <div class="headhero-center">Send Video</div>
-        <div class="hero-text-holder">
-            <div class="w-form">
-                <form id="email-form" name="email-form" data-name="Email Form" class="form"><label for="Contact">Choose Recipient:</label><input type="tel" class="text-field-2 w-input" maxlength="256" name="Contact" data-name="Contact" id="Contact" required=""><label for="Message">Attach Text Message:</label><input type="text" class="message-text-field w-input" maxlength="256" name="Message" data-name="Message" id="Message" required="">
-                    <div class="w-row">
-                        <div class="column-13 w-col w-col-8"></div>
-                        <div class="w-col w-col-4">
-                            <a href="#" class="link-block-9 w-inline-block">
-                                <div class="btn">Send</div>
+    <form name='f' th:object="${contacts}" method='POST'>
+        <table>
+            <tr>
+                <td>
+                    <select th:field="*{}">
+                        <option value=""> -- </option>
+                        <option th:each="contacts : ${contacts}"
+                                th:value="Contacts${contacts}"
+                                th:utext="${contacts}"/>
+                    </select>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td><input name="submit" type="submit" value="submit" /></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>
                             </a>
                         </div>
                     </div>
