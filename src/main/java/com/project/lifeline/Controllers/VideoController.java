@@ -94,6 +94,13 @@ public class VideoController {
     }
 
     @GetMapping("/watchvideo")
+    public ModelAndView getWatchVideo(String id, ModelAndView modelAndView) {
+        modelAndView.setViewName("watchvideo");
+        modelAndView.addObject("id", id);
+        return modelAndView;
+    }
+
+    @GetMapping("/watchvideo2")
     @ResponseBody
     public final ResponseEntity<InputStreamResource> watchVideo(String id) throws Exception {
         Optional<Video> video = videoService.findById(UUID.fromString(id));
