@@ -15,6 +15,8 @@
     <div class="hero-text-holder">
         <video class="video-background" controls autoplay loop playsinline name="media">
             <source th:src="@{/watchvideo2(id=${id})}" type="video/mp4">
+            <source th:src="@{/watchvideo2(id=${id})}" type="video/webm">
+            <source th:src="@{/watchvideo2(id=${id})}" type="video/*">
         </video>
     </div>
 </div>
