@@ -13,7 +13,7 @@ import java.net.URI;
 public class SMSServiceTwilio implements SMSService{
     // Find your Account Sid and Token at twilio.com/console
     public static final String ACCOUNT_SID = "AC39af82b652dcef414d45b82ba228e2a3";
-    public static final String AUTH_TOKEN = "2eda9add933efa89f1b0af854770e315";
+    public static final String AUTH_TOKEN = "e8c88c7813bf4a12aafbb14a01171042";
     public static final String TWILIO_PHONE = "+12563635744";
 
     @Override

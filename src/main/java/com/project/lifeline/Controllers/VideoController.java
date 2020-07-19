@@ -106,7 +106,7 @@ public class VideoController {
 
         InputStream inputStream = new ByteArrayInputStream(videoBytes);//or read from wherever your data is into stream
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.valueOf("video/" + video.get().getMimeType()) );
+        headers.setContentType(MediaType.valueOf("video/mp4"));
         headers.set("Accept-Ranges", "bytes");
         headers.set("Expires", "0");
         headers.set("Cache-Control", "no-cache, no-store");
