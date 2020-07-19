@@ -15,10 +15,11 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class VideoService {
+public class VideoService implements IVideoService {
     @Autowired
     VideoRepository videoRepository;
 
@@ -66,15 +67,8 @@ public class VideoService {
 
     }
 
-    public Video getVideById(UUID id){
-        List<Video> videos = this.findAll();
-
-        for(int i = 0; i < videos.size(); i++){
-            if(videos.get(i).getVideoId().equals(id)){
-                return videos.get(i);
-            }
-        }
-
-        return null;
+    @Override
+    public Optional<Video> findById(UUID id) {
+          return videoRepository.findById(id);
     }
 }

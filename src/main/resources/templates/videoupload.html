@@ -15,7 +15,7 @@
     <div class="box-holder">
         <div class="headhero-center">Video</div>
         <div class="hero-text-holder">
-            <form action="#" th:action="@{/videoload}" th:object="${videoSaveModel}" enctype="multipart/form-data" method="post">
+            <form action="#" th:action="@{/videoupload}" th:object="${videoSaveModel}" enctype="multipart/form-data" method="post">
                 <label class="field-label-2">Record:
                 <input type="file" accept="video/*" capture="user" required="true" path="file" name="file" />
                 </label>
@@ -28,7 +28,7 @@
     <div class="phone-sign-in w-container">
         <div class="headhero-center">Video</div>
         <div class="hero-text-holder">
-            <form action="#" th:action="@{/videoload}" th:object="${videoSaveModel}" enctype="multipart/form-data" method="post">
+            <form action="#" th:action="@{/videoupload}" th:object="${videoSaveModel}" enctype="multipart/form-data" method="post">
                 <label class="field-label-2">Record:
                     <input type="file" accept="video/*" capture="user" required="true" path="file" name="file" />
                 </label>

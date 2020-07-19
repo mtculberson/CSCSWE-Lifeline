@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.io.*;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -35,13 +36,13 @@ public class VideoController {
     @Autowired
     private SMSService smsService;
 
-    @GetMapping("/videoload")
+    @GetMapping("/videoupload")
     String getVideo(Model model){
         model.addAttribute("videoSaveModel", new VideoSaveModel());
-        return "videoload";
+        return "videoupload";
     }
 
-    @PostMapping("/videoload")
+    @PostMapping("/videoupload")
     String postVideo(@RequestParam("file") MultipartFile file, Authentication auth){
         Users user = usersService.findUserByUsername(auth.getName());
 
@@ -87,19 +88,18 @@ public class VideoController {
     }
 
     @GetMapping("/watchvideo")
-    @ResponseBody
     public ResponseEntity<byte[]> getWatchVideo(String id) throws IOException {
-        Video video = videoService.getVideById(UUID.fromString(id));
-
+        Optional<Video> video = videoService.findById(UUID.fromString(id));
+        
         File outputFile = null;
-        InputStream is = new BufferedInputStream(new ByteArrayInputStream(video.getVideoData()));
+        InputStream is = new BufferedInputStream(new ByteArrayInputStream(video.get().getVideoData()));
         String mimeType = URLConnection.guessContentTypeFromStream(is);
 
         try {
             outputFile = File.createTempFile("file", "." + mimeType);
             outputFile.deleteOnExit();
             FileOutputStream fileoutputstream = new FileOutputStream(outputFile);
-            fileoutputstream.write(video.getVideoData());
+            fileoutputstream.write(video.get().getVideoData());
             fileoutputstream.close();
         } catch (IOException ex) {
             return null;
