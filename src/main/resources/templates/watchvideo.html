@@ -11,7 +11,8 @@
     <title>Video</title>
 </head>
 <body class="body">
-    <video width="500" height="500" th></video>
+    <video width="500" height="500" controls autoplay="autoplay">
+        <source src="@{/getvideodata/(id=${videoId})}" type="video/*">
+    </video>
 </body>
-
 </html>

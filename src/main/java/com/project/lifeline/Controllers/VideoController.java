@@ -1,11 +1,17 @@
 package com.project.lifeline.Controllers;
 
+import com.google.common.io.Resources;
+import com.google.common.primitives.Longs;
 import com.project.lifeline.Models.*;
 import com.project.lifeline.Services.ContactService;
 import com.project.lifeline.Services.SMSService;
 import com.project.lifeline.Services.UsersService;
 import com.project.lifeline.Services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -88,25 +94,39 @@ public class VideoController {
     }
 
     @GetMapping("/watchvideo")
-    public ResponseEntity<byte[]> getWatchVideo(String id) throws IOException {
-        Optional<Video> video = videoService.findById(UUID.fromString(id));
-        
-        File outputFile = null;
-        InputStream is = new BufferedInputStream(new ByteArrayInputStream(video.get().getVideoData()));
-        String mimeType = URLConnection.guessContentTypeFromStream(is);
-
-        try {
-            outputFile = File.createTempFile("file", "." + mimeType);
-            outputFile.deleteOnExit();
-            FileOutputStream fileoutputstream = new FileOutputStream(outputFile);
-            fileoutputstream.write(video.get().getVideoData());
-            fileoutputstream.close();
-        } catch (IOException ex) {
-            return null;
-        }
-
-        return null;
-
+    ModelAndView watchVideo(String id, ModelAndView modelAndView) {
+        modelAndView.addObject("videoId", id);
+        modelAndView.setViewName("watchvideo");
+        return modelAndView;
     }
 
+    @GetMapping("/getvideodata")
+    @ResponseBody
+    public final ResponseEntity<InputStreamResource>
+    retrieveResource(@RequestHeader(value = "Range", required = false) String range, String id) throws Exception {
+        Optional<Video> video = videoService.findById(UUID.fromString(id));
+
+        byte[] videoBytes = video.get().getVideoData();
+        long rangeStart = Longs.tryParse(range.replace("bytes=","").split("-")[0]);//parse range header, which is bytes=0-10000 or something like that
+        long rangeEnd = Longs.tryParse(range.replace("bytes=","").split("-")[0]);//parse range header, which is bytes=0-10000 or something like that
+        long contentLength = videoBytes.length;//you must have it somewhere stored or read the full file size
+
+        InputStream inputStream = new ByteArrayInputStream(videoBytes);//or read from wherever your data is into stream
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.valueOf("video/" + video.get().getMimeType()) );
+        headers.set("Accept-Ranges", "bytes");
+        headers.set("Expires", "0");
+        headers.set("Cache-Control", "no-cache, no-store");
+        headers.set("Connection", "keep-alive");
+        headers.set("Content-Transfer-Encoding", "binary");
+        headers.set("Content-Length", String.valueOf(rangeEnd - rangeStart));
+
+        //if start range assume that all content
+        if (rangeStart == 0) {
+            return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
+        } else {
+            headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
+            return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.PARTIAL_CONTENT);
+        }
+    }
 }
