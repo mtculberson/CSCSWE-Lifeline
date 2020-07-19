@@ -58,4 +58,14 @@ public class VideoSendModel {
     }
 
     private UUID VideoId;
+
+    public String getMimeType() {
+        return MimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        MimeType = mimeType;
+    }
+
+    private String MimeType;
 }

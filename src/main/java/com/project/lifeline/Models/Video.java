@@ -8,6 +8,11 @@ import java.util.UUID;
 @Table(name="video", schema = "dbo")
 public class Video {
 
+    @Id
+    @Column(name = "VIDEO_ID" , columnDefinition="uniqueidentifier")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID VideoId;
+
     public UUID getVideoId() {
         return VideoId;
     }
@@ -24,10 +29,16 @@ public class Video {
         VideoData = videoData;
     }
 
-    @Id
-    @Column(name = "VIDEO_ID" , columnDefinition="uniqueidentifier")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID VideoId;
+    public String getMimeType() {
+        return MimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        MimeType = mimeType;
+    }
+
+    @Column(name = "MIME_TYPE" , columnDefinition="nvarchar(50)")
+    private String MimeType;
 
     @Column(name = "VIDEO_DATA" , columnDefinition="varbinary(max)")
     private byte[] VideoData;

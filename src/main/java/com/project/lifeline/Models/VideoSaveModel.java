@@ -22,6 +22,16 @@ public class VideoSaveModel {
         VideoDataStr = videoDataStr;
     }
 
+    public String getMimeType() {
+        return MimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        MimeType = mimeType;
+    }
+
+    private String MimeType;
+
     private UUID VideoId;
 
     @NotNull

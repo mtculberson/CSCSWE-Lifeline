@@ -2,10 +2,12 @@ package com.project.lifeline.Services;
 
 import com.project.lifeline.Models.Contact;
 import com.project.lifeline.Models.Emergency;
+import com.project.lifeline.Models.Users;
 import com.project.lifeline.Models.Video;
 import com.project.lifeline.Repositories.EmergencyRepository;
 import com.project.lifeline.Repositories.VideoRepository;
 import com.sun.xml.bind.api.impl.NameConverter;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,10 +23,10 @@ import java.util.UUID;
 @Service
 public class VideoService implements IVideoService {
     @Autowired
-    VideoRepository videoRepository;
+    private VideoRepository videoRepository;
 
     @Autowired
-    EmergencyRepository emergencyRepository;
+    private EmergencyRepository emergencyRepository;
 
     public List<Video> findAll() {
 
@@ -35,6 +37,7 @@ public class VideoService implements IVideoService {
 
         return videos;
     }
+
 
     public Video addVideo(MultipartFile videoData){
         Video video = new Video();
@@ -49,12 +52,15 @@ public class VideoService implements IVideoService {
             return null;
         }
 
+        String extension = FilenameUtils.getExtension(videoData.getOriginalFilename());
+
+        video.setMimeType(extension);
         video.setVideoData(bytes);
         video.setCreatedOn(LocalDateTime.now());
 
-        videoRepository.save(video);
+        Video vid = videoRepository.save(video);
 
-        return video;
+        return vid;
     }
 
     public void addEmergency(UUID UserId, UUID VideoId){
