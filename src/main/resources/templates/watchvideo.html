@@ -13,7 +13,7 @@
 <body>
 <div layout:fragment="content">
     <div class="hero-text-holder">
-        <video controls autoplay name="media" style="margin-top:20px;">
+        <video class="video-background" controls autoplay loop playsinline name="media">
             <source th:src="@{/watchvideo2(id=${id})}" type="video/mp4">
         </video>
     </div>
