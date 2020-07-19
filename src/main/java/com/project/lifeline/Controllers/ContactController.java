@@ -28,15 +28,6 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-    @Autowired
-    private VideoService videoService;
-
-    @Autowired
-    private UsersService usersService;
-
-    @Autowired
-    private SMSService smsService;
-
     @GetMapping("/emergencycontact")
     String getEmergencyContact(Model model, Authentication auth) {
         List<Contact> contacts = contactService.findEmergencyContacts(auth);
@@ -97,79 +88,6 @@ public class ContactController {
         List<Contact> contacts = contactService.findEmergencyContacts(auth);
         model.addAttribute("contacts", contacts);
         return "emergencycontact";
-    }
-
-    @GetMapping("/videoload")
-    String getVideo(Model model){
-        model.addAttribute("videoSaveModel", new VideoSaveModel());
-        return "videoload";
-    }
-
-    @PostMapping("/videoload")
-    String postVideo(@RequestParam("file") MultipartFile file, Authentication auth){
-        Users user = usersService.findUserByUsername(auth.getName());
-
-        Video videoModel = videoService.addVideo(file);
-        videoService.addEmergency(user.getUserId(), videoModel.getVideoId());
-        return "redirect:/sendvideo?id=" + videoModel.getVideoId().toString();
-    }
-
-    @GetMapping("/sendvideo")
-    String getSendVideo(String id, Model model, Authentication auth){
-        VideoSendModel videoSendModel = new VideoSendModel();
-        List<Contact> contacts = contactService.findEmergencyContacts(auth);
-
-        videoSendModel.setVideoId(UUID.fromString(id));
-        videoSendModel.setContacts(contacts);
-        model.addAttribute("videoSendModel", videoSendModel);
-        return "sendvideo";
-    }
-
-    @PostMapping("/sendvideo")
-    ModelAndView postSendVideo(@Valid @ModelAttribute("videoSendModel") VideoSendModel videoSendModel,BindingResult results, ModelAndView modelAndView) throws IOException {
-        videoSendModel.setSelectedContact(contactService.getContactById(videoSendModel.getContactId()));
-
-        String contactName = videoSendModel.getSelectedContact().getFirstName() + " " + videoSendModel.getSelectedContact().getLastName();
-        String message = videoSendModel.getMessage();
-        String phone = videoSendModel.getSelectedContact().getPhoneNumber();
-
-        String path = "http://lifeline-env.eba-pegzmaqe.us-east-2.elasticbeanstalk.com/watchvideo?id=" + videoSendModel.getVideoId();
-        message += " Click here to view emergency video: " + path;
-
-        try {
-            smsService.sendSMS(phone, message);
-        } catch (Exception e) {
-            modelAndView.setViewName("errorText");
-            return modelAndView;
-        }
-
-        modelAndView.addObject("ContactName", contactName);
-        modelAndView.addObject("Message", message);
-        modelAndView.addObject("PhoneNumber", phone);
-        modelAndView.setViewName("successText");
-        return modelAndView;
-    }
-
-    @GetMapping("/watchvideo")
-    @ResponseBody public ResponseEntity<byte[]> getWatchVideo(String id) throws IOException {
-        Video video = videoService.getVideById(UUID.fromString(id));
-
-        File outputFile = null;
-        InputStream is = new BufferedInputStream(new ByteArrayInputStream(video.getVideoData()));
-        String mimeType = URLConnection.guessContentTypeFromStream(is);
-
-        try {
-            outputFile = File.createTempFile("file", "." + mimeType);
-            outputFile.deleteOnExit();
-            FileOutputStream fileoutputstream = new FileOutputStream(outputFile);
-            fileoutputstream.write(video.getVideoData());
-            fileoutputstream.close();
-        } catch (IOException ex) {
-            return null;
-        }
-
-        return null;
-
     }
 
 }
