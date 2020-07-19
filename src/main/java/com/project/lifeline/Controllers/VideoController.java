@@ -122,9 +122,11 @@ public class VideoController {
         headers.set("Content-Length", String.valueOf(rangeEnd - rangeStart));
 
         //if start range assume that all content
-
-            headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
+        if (rangeStart == 0) {
             return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
+        } else {
+            headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
+            return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.PARTIAL_CONTENT);
         }
-
+    }
 }
