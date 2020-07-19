@@ -94,22 +94,15 @@ public class VideoController {
     }
 
     @GetMapping("/watchvideo")
-    ModelAndView watchVideo(String id, ModelAndView modelAndView) {
-        modelAndView.addObject("videoId", id);
-        modelAndView.setViewName("watchvideo");
-        return modelAndView;
-    }
-
-    @GetMapping("/getvideodata")
     @ResponseBody
-    public final ResponseEntity<InputStreamResource>
-    retrieveResource(@RequestHeader(value = "Range", required = false) String range, String id) throws Exception {
+    public final ResponseEntity<InputStreamResource> watchVideo(String id) throws Exception {
         Optional<Video> video = videoService.findById(UUID.fromString(id));
 
         byte[] videoBytes = video.get().getVideoData();
-        long rangeStart = Longs.tryParse(range.replace("bytes=","").split("-")[0]);//parse range header, which is bytes=0-10000 or something like that
-        long rangeEnd = Longs.tryParse(range.replace("bytes=","").split("-")[0]);//parse range header, which is bytes=0-10000 or something like that
-        long contentLength = videoBytes.length;//you must have it somewhere stored or read the full file size
+        long contentLength = videoBytes.length;
+
+        long rangeStart = 0;
+        long rangeEnd = contentLength;
 
         InputStream inputStream = new ByteArrayInputStream(videoBytes);//or read from wherever your data is into stream
         HttpHeaders headers = new HttpHeaders();
