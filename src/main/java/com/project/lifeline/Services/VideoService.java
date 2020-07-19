@@ -1,5 +1,6 @@
 package com.project.lifeline.Services;
 
+import com.project.lifeline.Models.Contact;
 import com.project.lifeline.Models.Emergency;
 import com.project.lifeline.Models.Video;
 import com.project.lifeline.Repositories.EmergencyRepository;
@@ -7,9 +8,13 @@ import com.project.lifeline.Repositories.VideoRepository;
 import com.sun.xml.bind.api.impl.NameConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,9 +25,30 @@ public class VideoService {
     @Autowired
     EmergencyRepository emergencyRepository;
 
-    public Video addVideo(String videoData){
+    public List<Video> findAll() {
+
+        Iterable<Video> it = videoRepository.findAll();
+
+        ArrayList<Video> videos = new ArrayList<Video>();
+        it.forEach(e -> videos.add(e));
+
+        return videos;
+    }
+
+    public Video addVideo(MultipartFile videoData){
         Video video = new Video();
-        video.setVideoData(videoData.getBytes(StandardCharsets.UTF_16));
+
+        byte[] bytes = null;
+
+        try {
+            bytes = videoData.getBytes();
+            InputStream inputStream = new ByteArrayInputStream(bytes);
+
+        } catch (IOException e) {
+            return null;
+        }
+
+        video.setVideoData(bytes);
         video.setCreatedOn(LocalDateTime.now());
 
         videoRepository.save(video);
@@ -38,5 +64,17 @@ public class VideoService {
 
         emergencyRepository.save(emergency);
 
+    }
+
+    public Video getVideById(UUID id){
+        List<Video> videos = this.findAll();
+
+        for(int i = 0; i < videos.size(); i++){
+            if(videos.get(i).getVideoId().equals(id)){
+                return videos.get(i);
+            }
+        }
+
+        return null;
     }
 }

@@ -12,51 +12,46 @@
 </head>
 <body class="body-2">
 <div layout:fragment="content">
-    <form name='f' th:object="${contacts}" method='POST'>
-        <table>
-            <tr>
-                <td>
-                    <select th:field="*{}">
-                        <option value=""> -- </option>
-                        <option th:each="contacts : ${contacts}"
-                                th:value="Contacts${contacts}"
-                                th:utext="${contacts}"/>
-                    </select>
-
-                </td>
-            </tr>
-
-            <tr>
-                <td><input name="submit" type="submit" value="submit" /></td>
-            </tr>
-        </table>
-    </form>
-
-</body>
-
-</html>
-                            </a>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div class="box-holder">
+        <div class="headhero-center">Send Video</div>
+        <div class="hero-text-holder">
+            <form action="#" th:action="@{/sendvideo}" th:object="${videoSendModel}" method="post">
+                <input type="hidden" th:field="*{VideoId}" />
+                <label class="field-label-2">Contact:
+                <select class="form-control" th:field="*{ContactId}" name="ContactId" id="ContactId" required="true">
+                    <option value="">Select Contact</option>
+                    <option th:each="contact : *{Contacts}"
+                            th:value="${contact.getContactId()}"
+                            th:text="${contact.getFirstName() + ' ' + contact.getLastName()}"></option>
+                </select>
+                </label>
+                </br>
+                <label class="field-label-2">Attach Message: <input type="text" id ="Message" class="text-field w-input" required="true" th:field="*{Message}" maxlength="255" /></label>
+                </br>
+                </br>
+                <input class="btn" name="submit" type="submit" value="Send" />
+            </form>
         </div>
     </div>
     <div class="phone-sign-in w-container">
-        <div class="headhero-left">Send Video</div>
+        <div class="headhero-center">Send Video</div>
         <div class="hero-text-holder">
-            <div class="w-form">
-                <form id="email-form" name="email-form" data-name="Email Form" class="form"><label for="Contact-2">Choose Recipient:</label><input type="tel" class="text-field-2 w-input" maxlength="256" name="Contact" data-name="Contact" id="Contact-2" required=""><label for="Message-2">Attach Text Message:</label><input type="text" class="message-text-field w-input" maxlength="256" name="Message" data-name="Message" id="Message-2" required="">
-                    <div class="w-row">
-                        <div class="column-9 w-col w-col-8"></div>
-                        <div class="w-col w-col-4">
-                            <a href="#" class="link-block-9 w-inline-block">
-                                <div class="btn">Send</div>
-                            </a>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <form action="#" th:action="@{/sendvideo}" th:object="${videoSendModel}" method="post">
+                <input type="hidden" th:field="*{VideoId}" />
+                <label class="field-label-2">Contact:
+                    <select class="form-control" th:field="*{ContactId}" name="ContactId" id="ContactId" required="true">
+                        <option value="">Select Contact</option>
+                        <option th:each="contact : *{Contacts}"
+                                th:value="${contact.getContactId()}"
+                                th:text="${contact.getFirstName() + ' ' + contact.getLastName()}"></option>
+                    </select>
+                </label>
+                </br>
+                <label class="field-label-2">Attach Message: <input type="text" id ="Message" class="text-field w-input" required="true" th:field="*{Message}" maxlength="255" /></label>
+                </br>
+                </br>
+                <input class="btn" name="submit" type="submit" value="Send" />
+            </form>
         </div>
     </div>
     </div>
