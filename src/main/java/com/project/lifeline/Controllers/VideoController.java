@@ -113,6 +113,8 @@ public class VideoController {
             range = range + contentLength;
         } else if (range.equals("bytes=0-%s")) {
             range = String.format(range, contentLength);
+        } else if(range.equals("bytes=0-1")) { //safari
+            contentLength = 2;
         }
         else if (range == null) {
             range = "bytes=0-" + contentLength;
