@@ -158,6 +158,7 @@ public class VideoController {
             rangeStart = 0;
             rangeEnd = 1;
             contentLength = 2;
+            videoData = new byte[] { videoData[0], videoData[1]};
         }
 
         HttpHeaders headers = new HttpHeaders();
@@ -169,8 +170,6 @@ public class VideoController {
         headers.set("Content-Transfer-Encoding", "binary");
         headers.set("Content-Length", contentLength + "");
         headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
-        //long contentLength = videoBytes.length;
-
 
         return videoData;
     }
