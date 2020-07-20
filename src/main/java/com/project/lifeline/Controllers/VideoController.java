@@ -107,6 +107,7 @@ public class VideoController {
         String encoded = Base64.getEncoder().encodeToString(videoData);
         String URIdata = "data:" + mimeType + ";base64," + encoded;
         modelAndView.addObject("URIdata", URIdata);
+        modelAndView.addObject("MIMEtype",mimeType);
         return modelAndView;
     }
 
