@@ -8,14 +8,17 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width">
-    <title>Add Contact</title>
+    <title>Emergency Video</title>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="hero-text-holder" style="text-align:center">
-        <video width="720" height="480" class="video" muted loop autoplay controls playsinline>
+        <video class="video" width="350" style="object-fit: contain;" muted loop autoplay controls playsinline>
             <source th:src="@{/watchvideo2(id=${id})}" type="video/mp4">
             <source th:src="@{/watchvideo2(id=${id})}" type="video/webm">
+            <source th:src="@{/watchvideo2(id=${id})}" type="video/x-m4v">
+            <source th:src="@{/watchvideo2(id=${id})}" type="video/3gpp">
+
             <source th:src="@{/watchvideo2(id=${id})}" type="video/*">
         </video>
     </div>

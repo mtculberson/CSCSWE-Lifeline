@@ -102,16 +102,25 @@ public class VideoController {
 
     @GetMapping("/watchvideo2")
     @ResponseBody
-    public final ResponseEntity<InputStreamResource> watchVideo(String id) throws Exception {
+    public final ResponseEntity<InputStreamResource> watchVideo(@RequestHeader(value = "Range", defaultValue = "bytes=0-%s")
+                                                                            String range, String id) throws Exception {
         Optional<Video> video = videoService.findById(UUID.fromString(id));
 
         byte[] videoBytes = video.get().getVideoData();
         long contentLength = videoBytes.length;
 
-        long rangeStart = 0;
-        long rangeEnd = contentLength;
+        if(range.equals("bytes=0-")) {
+            range = range + contentLength;
+        } else if (range.equals("bytes=0-%s")) {
+            range = String.format(range, contentLength);
+        } else if (range == null) {
+            range = "bytes=0-" + contentLength;
+        }
 
-        InputStream inputStream = new ByteArrayInputStream(videoBytes);//or read from wherever your data is into stream
+        long rangeStart = Longs.tryParse(range.replace("bytes=","").split("-")[0]);//parse range header, which is bytes=0-10000 or something like that
+        long rangeEnd = Longs.tryParse(range.replace("bytes=","").split("-")[1]);
+
+        InputStream inputStream = new ByteArrayInputStream(videoBytes);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.valueOf("video/mp4"));
         headers.set("Accept-Ranges", "bytes");
