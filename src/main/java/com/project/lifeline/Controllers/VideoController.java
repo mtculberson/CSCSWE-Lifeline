@@ -7,6 +7,7 @@ import com.project.lifeline.Services.ContactService;
 import com.project.lifeline.Services.SMSService;
 import com.project.lifeline.Services.UsersService;
 import com.project.lifeline.Services.VideoService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -100,6 +101,7 @@ public class VideoController {
         return modelAndView;
     }
 
+    /*
     @GetMapping("/watchvideo2")
     @ResponseBody
     public final ResponseEntity<InputStreamResource> watchVideo(@RequestHeader(value = "Range", defaultValue = "bytes=0-%s")
@@ -135,5 +137,41 @@ public class VideoController {
         headers.set("Content-Range", String.format("bytes %s-%s", rangeStart, rangeEnd));
 
         return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
+    }*/
+
+    @GetMapping(
+            value = "/watchvideo2",
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+    )
+    public @ResponseBody byte[] watchVideo(@RequestHeader(value = "Range")
+                                                       String range, String id) throws IOException {
+        Optional<Video> video = videoService.findById(UUID.fromString(id));
+        byte[] videoData = video.get().getVideoData();
+
+        String[] rangeSplit = range.replace("bytes=","").split("-");
+        long rangeStart = Longs.tryParse(rangeSplit[0]);
+        long rangeEnd = videoData.length;
+
+        long contentLength = videoData.length;
+
+        if(range.equals("bytes=0-1")) { //safari
+            rangeStart = 0;
+            rangeEnd = 1;
+            contentLength = 2;
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.valueOf("video/" + video.get().getMimeType()));
+        headers.set("Accept-Ranges", "bytes");
+        headers.set("Expires", "0");
+        headers.set("Cache-Control", "no-cache, no-store");
+        headers.set("Connection", "keep-alive");
+        headers.set("Content-Transfer-Encoding", "binary");
+        headers.set("Content-Length", contentLength + "");
+        headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
+        //long contentLength = videoBytes.length;
+
+
+        return videoData;
     }
 }
