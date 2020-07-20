@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.*;
 import java.net.URLConnection;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -98,6 +99,14 @@ public class VideoController {
     public ModelAndView getWatchVideo(String id, ModelAndView modelAndView) {
         modelAndView.setViewName("watchvideo");
         modelAndView.addObject("id", id);
+
+        Optional<Video> video = videoService.findById(UUID.fromString(id));
+        byte[] videoData = video.get().getVideoData();
+
+        String mimeType = "video/" + video.get().getMimeType();
+        String encoded = Base64.getEncoder().encodeToString(videoData);
+        String URIdata = "data:" + mimeType + ";base64," + encoded;
+        modelAndView.addObject("URIdata", URIdata);
         return modelAndView;
     }
 
@@ -139,39 +148,4 @@ public class VideoController {
         return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
     }*/
 
-    @GetMapping(value = "/watchvideo2")
-    public @ResponseBody ResponseEntity<byte[]> watchVideo(@RequestHeader(value = "Range", required = false)
-                                                       String range, String id) throws IOException {
-        Optional<Video> video = videoService.findById(UUID.fromString(id));
-        byte[] videoData = video.get().getVideoData();
-
-        if(range == null) {
-            range = "bytes=0-" + videoData.length;
-        }
-
-        String[] rangeSplit = range.replace("bytes=","").split("-");
-        long rangeStart = Longs.tryParse(rangeSplit[0]);
-        long rangeEnd = videoData.length;
-
-        long contentLength = videoData.length;
-
-        if(range.equals("bytes=0-1")) { //safari
-            rangeStart = 0;
-            rangeEnd = 1;
-            contentLength = 2;
-            videoData = new byte[] { videoData[0], videoData[1]};
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.valueOf("video/" + video.get().getMimeType()));
-        headers.set("Accept-Ranges", "bytes");
-        headers.set("Expires", "0");
-        headers.set("Cache-Control", "no-cache, no-store");
-        headers.set("Connection", "keep-alive");
-        headers.set("Content-Transfer-Encoding", "binary");
-        headers.set("Content-Length", contentLength + "");
-        headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
-
-        return new ResponseEntity<>(videoData, headers, HttpStatus.OK);
-    }
 }
