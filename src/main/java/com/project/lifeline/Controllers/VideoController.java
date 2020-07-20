@@ -125,13 +125,13 @@ public class VideoController {
 
         InputStream inputStream = new ByteArrayInputStream(videoBytes);
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.valueOf("video/mp4"));
+        headers.setContentType(MediaType.valueOf("video/" + video.get().getMimeType()));
         headers.set("Accept-Ranges", "bytes");
         headers.set("Expires", "0");
         headers.set("Cache-Control", "no-cache, no-store");
         headers.set("Connection", "keep-alive");
         headers.set("Content-Transfer-Encoding", "binary");
-        headers.set("Content-Length", String.valueOf(rangeEnd - rangeStart));
+        headers.set("Content-Length", contentLength + "");
 
         //if start range assume that all content
         if (rangeStart == 0) {
