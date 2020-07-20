@@ -103,11 +103,11 @@ public class VideoController {
         Optional<Video> video = videoService.findById(UUID.fromString(id));
         byte[] videoData = video.get().getVideoData();
 
-        String mimeType = "video/" + video.get().getMimeType();
+        String mimeType = "video/mp4";
         String encoded = Base64.getEncoder().encodeToString(videoData);
         String URIdata = "data:" + mimeType + ";base64," + encoded;
         modelAndView.addObject("URIdata", URIdata);
-        modelAndView.addObject("MIMEtype",mimeType);
+        modelAndView.addObject("MIMEtype", mimeType);
         return modelAndView;
     }
 
