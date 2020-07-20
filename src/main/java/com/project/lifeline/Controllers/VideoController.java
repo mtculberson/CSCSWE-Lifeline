@@ -132,13 +132,8 @@ public class VideoController {
         headers.set("Connection", "keep-alive");
         headers.set("Content-Transfer-Encoding", "binary");
         headers.set("Content-Length", contentLength + "");
+        headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
 
-        //if start range assume that all content
-        if (rangeStart == 0) {
-            return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
-        } else {
-            headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
-            return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.PARTIAL_CONTENT);
-        }
+        return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
     }
 }
