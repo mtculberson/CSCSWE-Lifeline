@@ -139,14 +139,15 @@ public class VideoController {
         return new ResponseEntity<>(new InputStreamResource(inputStream), headers, HttpStatus.OK);
     }*/
 
-    @GetMapping(
-            value = "/watchvideo2",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
-    )
-    public @ResponseBody byte[] watchVideo(@RequestHeader(value = "Range")
+    @GetMapping(value = "/watchvideo2")
+    public @ResponseBody ResponseEntity<byte[]> watchVideo(@RequestHeader(value = "Range", required = false)
                                                        String range, String id) throws IOException {
         Optional<Video> video = videoService.findById(UUID.fromString(id));
         byte[] videoData = video.get().getVideoData();
+
+        if(range == null) {
+            range = "bytes=0-" + videoData.length;
+        }
 
         String[] rangeSplit = range.replace("bytes=","").split("-");
         long rangeStart = Longs.tryParse(rangeSplit[0]);
@@ -171,6 +172,6 @@ public class VideoController {
         headers.set("Content-Length", contentLength + "");
         headers.set("Content-Range", String.format("bytes %s-%s/%s", rangeStart, rangeEnd, contentLength));
 
-        return videoData;
+        return new ResponseEntity<>(videoData, headers, HttpStatus.OK);
     }
 }
