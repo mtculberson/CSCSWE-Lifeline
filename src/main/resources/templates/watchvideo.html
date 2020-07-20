@@ -12,8 +12,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="hero-text-holder">
-        <video class="video" muted loop autoplay controls playsinline>
+    <div class="hero-text-holder" style="text-align:center">
+        <video width="720" height="480" class="video" muted loop autoplay controls playsinline>
             <source th:src="@{/watchvideo2(id=${id})}" type="video/mp4">
             <source th:src="@{/watchvideo2(id=${id})}" type="video/webm">
             <source th:src="@{/watchvideo2(id=${id})}" type="video/*">
